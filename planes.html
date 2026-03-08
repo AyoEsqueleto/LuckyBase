@@ -209,6 +209,29 @@ color:#1565ff;
 background:#eaf1ff;
 }
 
+.web-legal-cta{
+margin-top:28px;
+text-align:center;
+}
+
+.outline-cta{
+display:inline-block;
+padding:11px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+border:2px solid #1565ff;
+color:#1565ff;
+background:transparent;
+transition:0.25s ease;
+}
+
+.outline-cta:hover{
+background:#1565ff;
+color:#fff;
+transform:translateY(-2px);
+}
+
 section{
 padding:95px 8%;
 }
@@ -471,6 +494,16 @@ body.dark-mode .hero .cta:hover{
 background:#bfdbfe;
 }
 
+body.dark-mode .outline-cta{
+border-color:#93c5fd;
+color:#93c5fd;
+}
+
+body.dark-mode .outline-cta:hover{
+background:#93c5fd;
+color:#0f172a;
+}
+
 body.dark-mode footer{
 background:#0b1220;
 }
@@ -482,6 +515,21 @@ color:#93c5fd;
 
 body.dark-mode #topBtn{
 background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.js-enabled .reveal-item{
+opacity:0;
+transform:translateY(32px);
+filter:blur(2px);
+transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.2,0.7,0.2,1),filter 0.65s ease;
+transition-delay:var(--delay,0ms);
+will-change:opacity,transform,filter;
+}
+
+.js-enabled .reveal-item.is-visible{
+opacity:1;
+transform:translateY(0);
+filter:blur(0);
 }
 
 @media(max-width:768px){
@@ -542,6 +590,7 @@ max-width:100%;
 
 section{
 padding:72px 5%;
+scroll-margin-top:118px;
 }
 
 .services{
@@ -551,6 +600,15 @@ margin-top:24px;
 
 .card{
 padding:22px;
+}
+
+.web-legal-cta{
+margin-top:20px;
+}
+
+.outline-cta{
+width:100%;
+text-align:center;
 }
 
 .notice-overlay{
@@ -659,9 +717,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <section id="planes-web">
-<h2 style="text-align:center">Planes de Páginas Web</h2>
+<h2 class="reveal-item" style="text-align:center">Planes de Páginas Web</h2>
 <div class="services">
-<div class="card">
+<div class="card reveal-item">
 <h3>LuckyWeb Basic</h3>
 <ul>
 <li>Diseño responsive</li>
@@ -671,7 +729,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 <a class="cta" href="index.html#contacto">Solicitar plan</a>
 </div>
-<div class="card">
+<div class="card reveal-item">
 <h3>LuckyWeb Corporativa</h3>
 <ul>
 <li>Hasta 6 páginas internas</li>
@@ -681,7 +739,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 <a class="cta" href="index.html#contacto">Solicitar plan</a>
 </div>
-<div class="card premium-card">
+<div class="card premium-card reveal-item">
 <span class="premium-badge">PREMIUM</span>
 <h3>LuckyWeb Ecommerce</h3>
 <ul>
@@ -692,6 +750,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ul>
 <a class="cta" href="index.html#contacto">Solicitar plan</a>
 </div>
+</div>
+<div class="web-legal-cta reveal-item">
+<a class="outline-cta" href="terminos-contratacion-web.html">Ver términos y condiciones de contratación web</a>
 </div>
 </section>
 
@@ -733,6 +794,35 @@ const automationNotice=document.getElementById("automationNotice")
 const closeAutomationNotice=document.getElementById("closeAutomationNotice")
 const sunIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line><line x1="4.9" y1="4.9" x2="7" y2="7"></line><line x1="17" y1="17" x2="19.1" y2="19.1"></line><line x1="17" y1="7" x2="19.1" y2="4.9"></line><line x1="4.9" y1="19.1" x2="7" y2="17"></line></svg>'
 const moonIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8z"></path></svg>'
+
+document.body.classList.add("js-enabled")
+
+const revealTargets=[
+...document.querySelectorAll("section h2"),
+...document.querySelectorAll(".services .card"),
+...document.querySelectorAll(".web-legal-cta")
+]
+
+revealTargets.forEach((el,index)=>{
+el.classList.add("reveal-item")
+el.style.setProperty("--delay",`${(index%6)*65}ms`)
+})
+
+const prefersReducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches
+if(prefersReducedMotion||!("IntersectionObserver" in window)){
+revealTargets.forEach((el)=>el.classList.add("is-visible"))
+}else{
+const revealObserver=new IntersectionObserver((entries,observer)=>{
+entries.forEach((entry)=>{
+if(entry.isIntersecting){
+entry.target.classList.add("is-visible")
+observer.unobserve(entry.target)
+}
+})
+},{threshold:0.2,rootMargin:"0px 0px -8% 0px"})
+
+revealTargets.forEach((el)=>revealObserver.observe(el))
+}
 
 window.onscroll=function(){
 if(document.body.scrollTop>400||document.documentElement.scrollTop>400){
