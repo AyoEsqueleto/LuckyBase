@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="LuckyBase: planes web, ecommerce y soluciones digitales para empresas.">
-<title>Términos Contratación Web | LuckyBase</title>
+<title>LuckyWeb Corporativa | LuckyBase</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.png" type="image/png">
 <!-- Google Tag Manager -->
@@ -87,7 +87,7 @@ display:block;
 
 .hero{
 padding:72px 8% 42px;
-background:linear-gradient(120deg,#1565ff,#3b82f6,#60a5fa);
+background:linear-gradient(120deg,#0f4dff,#2563eb,#60a5fa);
 color:#fff;
 }
 
@@ -101,20 +101,29 @@ max-width:860px;
 opacity:0.95;
 }
 
+.hero .pill{
+display:inline-flex;
+margin-top:16px;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(255,255,255,0.2);
+font-weight:600;
+}
+
 .wrapper{
 padding:34px 8% 30px;
 }
 
-.docs{
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
 }
 
 .card{
 background:#fff;
 border-radius:14px;
-padding:22px;
+padding:20px;
 box-shadow:0 12px 30px rgba(15,23,42,0.08);
 }
 
@@ -123,16 +132,16 @@ color:#1e40af;
 margin-bottom:8px;
 }
 
-.card p{
+.card ul{
+padding-left:18px;
 color:#475569;
-font-size:14px;
 line-height:1.6;
-min-height:70px;
+font-size:14px;
 }
 
-.download{
+.doc-btn{
 display:inline-block;
-margin-top:14px;
+margin-top:12px;
 padding:10px 14px;
 border-radius:8px;
 background:#1565ff;
@@ -141,10 +150,61 @@ text-decoration:none;
 font-weight:600;
 }
 
-.note{
-margin-top:20px;
-font-size:13px;
-color:#64748b;
+.compare{
+margin-top:26px;
+background:#fff;
+border-radius:14px;
+box-shadow:0 12px 30px rgba(15,23,42,0.08);
+overflow:auto;
+}
+
+.compare table{
+width:100%;
+border-collapse:collapse;
+min-width:620px;
+}
+
+.compare th,
+.compare td{
+padding:12px 14px;
+border-bottom:1px solid #e2e8f0;
+text-align:left;
+font-size:14px;
+}
+
+.compare th{
+background:#eff6ff;
+color:#1e3a8a;
+font-weight:700;
+}
+
+.compare .current{
+background:#dbeafe;
+font-weight:700;
+}
+
+.actions{
+margin-top:18px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.actions a{
+text-decoration:none;
+font-weight:600;
+border-radius:8px;
+padding:10px 14px;
+}
+
+.actions .primary{
+background:#1565ff;
+color:#fff;
+}
+
+.actions .secondary{
+background:#e5edff;
+color:#1e40af;
 }
 
 footer{
@@ -258,7 +318,8 @@ body.dark-mode .theme-toggle:hover{
 background:#374151;
 }
 
-body.dark-mode .card{
+body.dark-mode .card,
+body.dark-mode .compare{
 background:#1e293b;
 color:#e2e8f0;
 box-shadow:0 10px 30px rgba(0,0,0,0.35);
@@ -268,12 +329,22 @@ body.dark-mode .card h3{
 color:#93c5fd;
 }
 
-body.dark-mode .card p{
+body.dark-mode .card ul{
 color:#cbd5e1;
 }
 
-body.dark-mode .note{
-color:#94a3b8;
+body.dark-mode .compare th{
+background:#1e3a8a;
+color:#dbeafe;
+}
+
+body.dark-mode .compare td{
+border-bottom-color:#334155;
+}
+
+body.dark-mode .compare .current{
+background:#1d4ed8;
+color:#e0f2fe;
 }
 
 body.dark-mode footer{
@@ -350,50 +421,91 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav>
 <a href="index.html">Inicio</a>
 <a href="planes.html">Planes</a>
+<a href="comparador-planes-web.html">Comparador</a>
 <a href="index.html#contacto">Contacto</a>
 </nav>
 <button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"></button>
 </header>
 
 <section class="hero">
-<h1>Términos de Contratación Web</h1>
-<p>En esta sección puedes descargar en PDF la documentación legal y operativa para la contratación de páginas web de LuckyBase.</p>
+<h1>LuckyWeb Corporativa</h1>
+<p>Plan para empresas que necesitan estructura corporativa completa, diseño a medida y presencia sólida en buscadores.</p>
+<span class="pill">Entrega estimada 7-10 días</span>
 </section>
 
 <main class="wrapper">
-<section class="docs">
+<section class="grid">
 <article class="card">
-<h3>TyC LuckyWeb Basic</h3>
-<p>Términos y condiciones aplicables a la contratación del plan LuckyWeb Basic.</p>
-<a class="download" href="TyC-LuckyWeb-Basic.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+<h3>Incluye</h3>
+<ul>
+<li>Hasta 6 páginas internas</li>
+<li>Diseño personalizado</li>
+<li>SEO on-page</li>
+<li>Integraciones básicas</li>
+</ul>
 </article>
 
 <article class="card">
-<h3>TyC LuckyWeb Corporativa</h3>
-<p>Términos y condiciones aplicables a la contratación del plan LuckyWeb Corporativa.</p>
-<a class="download" href="TyC-LuckyWeb-Corporativa.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+<h3>Ideal para</h3>
+<ul>
+<li>Empresas con varias áreas</li>
+<li>Marcas que necesitan imagen sólida</li>
+<li>Servicios con más contenido</li>
+</ul>
 </article>
 
 <article class="card">
-<h3>TyC LuckyWeb Ecommerce</h3>
-<p>Términos y condiciones aplicables a la contratación del plan LuckyWeb Ecommerce.</p>
-<a class="download" href="TyC-LuckyWeb-Ecommerce.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
-</article>
-
-<article class="card">
-<h3>Requerimientos Webs</h3>
-<p>Documento de requerimientos y condiciones previas necesarias para iniciar el proyecto.</p>
-<a class="download" href="REQUERIMIENTOS-WEBS.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
-</article>
-
-<article class="card">
-<h3>Aviso Legal y Condiciones de Uso</h3>
-<p>Documento legal general sobre condiciones de uso y aspectos jurídicos complementarios.</p>
-<a class="download" href="AVISO LEGAL Y CONDICIONES DE USO.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+<h3>Documentación</h3>
+<a class="doc-btn" href="TyC-LuckyWeb-Corporativa.pdf" target="_blank" rel="noopener noreferrer">Abrir TyC Corporativa</a>
+<a class="doc-btn" href="REQUERIMIENTOS-WEBS.pdf" target="_blank" rel="noopener noreferrer">Abrir Requerimientos</a>
+<a class="doc-btn" href="AVISO LEGAL Y CONDICIONES DE USO.pdf" target="_blank" rel="noopener noreferrer">Abrir Aviso Legal</a>
 </article>
 </section>
 
-<p class="note">Última actualización de documentos: 8 de marzo de 2026.</p>
+<section class="compare">
+<table>
+<thead>
+<tr>
+<th>Comparador Lucky</th>
+<th>Basic</th>
+<th class="current">Corporativa</th>
+<th>Ecommerce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Secciones / páginas</td>
+<td>Hasta 5</td>
+<td class="current">Hasta 6 páginas</td>
+<td>Catálogo + checkout</td>
+</tr>
+<tr>
+<td>Diseño personalizado</td>
+<td>No</td>
+<td class="current">Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>SEO on-page</td>
+<td>Básico</td>
+<td class="current">Completo</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td>Ecommerce</td>
+<td>No</td>
+<td class="current">No</td>
+<td>Sí</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<div class="actions">
+<a class="primary" href="index.html#contacto">Solicitar este plan</a>
+<a class="secondary" href="comparador-planes-web.html">Ver comparador completo</a>
+<a class="secondary" href="terminos-contratacion-web.html">Ver documentación completa</a>
+</div>
 </main>
 
 <footer>
