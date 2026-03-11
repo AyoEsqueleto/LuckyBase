@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="LuckyBase: acceso de clientes y panel de gestión.">
-<title>Iniciar sesión | LuckyBase</title>
+<title>Panel de Cliente | LuckyBase</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.png" type="image/png">
 <!-- Google Tag Manager -->
@@ -107,57 +107,75 @@ opacity:0.95;
 padding:30px 8% 60px;
 }
 
-#seccion-login{
-max-width:420px;
+.panel{
+max-width:860px;
 margin:0 auto;
-display:flex;
-flex-direction:column;
-gap:12px;
 background:#fff;
-padding:22px;
-border-radius:14px;
+padding:24px;
+border-radius:16px;
 box-shadow:0 12px 30px rgba(15,23,42,0.08);
 border:1px solid rgba(148,163,184,0.2);
 }
 
-#seccion-login input{
-width:100%;
-padding:12px 14px;
-border-radius:10px;
-border:1px solid #d5def0;
-font-size:14px;
+.panel h3{
+font-size:20px;
+color:#1e40af;
+margin-bottom:16px;
+}
+
+.details{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+.detail{
 background:#f8fbff;
-transition:border-color 0.2s ease,box-shadow 0.2s ease,background 0.2s ease;
+border-radius:12px;
+padding:14px;
+border:1px solid rgba(148,163,184,0.2);
 }
 
-#seccion-login input:focus{
-outline:none;
-border-color:#3b82f6;
-background:#fff;
-box-shadow:0 0 0 4px rgba(59,130,246,0.15);
+.detail span{
+display:block;
+font-size:12px;
+color:#64748b;
 }
 
-#seccion-login button{
-padding:12px 16px;
-border-radius:10px;
+.detail strong{
+font-size:15px;
+color:#0f172a;
+}
+
+.actions{
+margin-top:18px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.actions button,
+.actions a{
+text-decoration:none;
+font-weight:600;
+border-radius:8px;
+padding:10px 14px;
 border:none;
+cursor:pointer;
+}
+
+.actions .primary{
 background:#1565ff;
 color:#fff;
-font-weight:600;
-cursor:pointer;
-transition:transform 0.2s ease,box-shadow 0.2s ease;
 }
 
-#seccion-login button:hover{
-background:#0e49c9;
-transform:translateY(-1px);
-box-shadow:0 10px 20px rgba(21,101,255,0.25);
+.actions .secondary{
+background:#e5edff;
+color:#1e40af;
 }
 
-.help{
+.empty{
 text-align:center;
-margin-top:14px;
-font-size:13px;
 color:#64748b;
 }
 
@@ -273,16 +291,27 @@ body.dark-mode .theme-toggle:hover{
 background:#374151;
 }
 
-body.dark-mode #seccion-login{
+body.dark-mode .panel{
 background:#1e293b;
 box-shadow:0 12px 30px rgba(0,0,0,0.35);
 border-color:#334155;
 }
 
-body.dark-mode #seccion-login input{
+body.dark-mode .panel h3{
+color:#93c5fd;
+}
+
+body.dark-mode .detail{
 background:#0f172a;
 border-color:#334155;
-color:#e2e8f0;
+}
+
+body.dark-mode .detail span{
+color:#94a3b8;
+}
+
+body.dark-mode .detail strong{
+color:#f8fafc;
 }
 
 body.dark-mode footer{
@@ -366,25 +395,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <section class="hero">
-<h1>Iniciar sesion</h1>
-<p>Acceso reservado para clientes con credenciales activas.</p>
+<h1>Panel de cliente</h1>
+<p>Resumen rápido de tu plan y datos de servicio.</p>
 </section>
 
 <main class="wrapper">
-<div id="seccion-login">
-  <input type="text" id="usuario" placeholder="Usuario">
-  <input type="password" id="password" placeholder="Contraseña">
-  <button onclick="ejecutarLogin()">Entrar</button>
+<div class="panel" id="panelContent">
+<p class="empty">Cargando datos...</p>
 </div>
-<p id="loginStatus" class="help" aria-live="polite"></p>
-<div id="seccion-datos" style="display:none;">
-  <h3>Bienvenido, <span id="nombre-usuario"></span></h3>
-  <p>Plan: <span id="info-plan"></span></p>
-  <p>Próximo Pago: <span id="info-pago"></span></p>
-  <p>Dominio: <span id="info-dominio"></span></p>
-  <p>Nº Pedido: <span id="info-pedido"></span></p>
-</div>
-<p class="help">Si necesitas acceso, escribe a luckybaseprin@gmail.com</p>
 </main>
 
 <footer>
@@ -450,75 +468,37 @@ updateThemeLabel()
 })
 }
 
-const URL_API = "https://script.google.com/macros/s/AKfycbxZeMApnIjxoF4aAPxNhcLbUb09JluFb4E7jP67bINuODTv08q9xDFtzC5updMnV_Gi/exec"
-
-let loginTimeoutId
-
-function handleLoginResponse(datos, user){
-  if (loginTimeoutId) {
-    clearTimeout(loginTimeoutId)
-    loginTimeoutId = null
-  }
-
-  if (datos && datos.success) {
-    const payload = {
-      user,
-      plan: datos.plan || '-',
-      proxpago: datos.proxpago || '-',
-      dominio: datos.dominio || '-',
-      npedido: datos.npedido || '-'
-    }
-    localStorage.setItem('clientData', JSON.stringify(payload))
-    window.location.href = "panel.html"
-  } else {
-    alert("Usuario o contraseña incorrectos")
-    if(status) status.textContent = "Credenciales incorrectas."
-  }
-}
-
-function ejecutarLogin(){
-  const user = document.getElementById('usuario').value.trim()
-  const pass = document.getElementById('password').value.trim()
-  const status = document.getElementById('loginStatus')
-  if(status) status.textContent = ""
-
-  if(!user || !pass){
-    alert("Completa usuario y contraseña")
-    return
-  }
-
-  if(status) status.textContent = "Conectando..."
-
-  const callbackName = "loginCallback_" + Date.now()
-  window[callbackName] = (datos) => {
-    handleLoginResponse(datos, user)
-    delete window[callbackName]
-    const script = document.getElementById(callbackName)
-    if(script) script.remove()
-  }
-
-  const script = document.createElement('script')
-  script.id = callbackName
-  const params = new URLSearchParams({
-    usuario: user,
-    password: pass,
-    callback: callbackName
+const panel = document.getElementById("panelContent")
+const raw = localStorage.getItem("clientData")
+if(raw){
+  const data = JSON.parse(raw)
+  panel.innerHTML = `\
+    <h3>Bienvenido, ${data.user}</h3>
+    <div class="details">
+      <div class="detail"><span>Plan</span><strong>${data.plan}</strong></div>
+      <div class="detail"><span>Próximo pago</span><strong>${data.proxpago}</strong></div>
+      <div class="detail"><span>Dominio</span><strong>${data.dominio}</strong></div>
+      <div class="detail"><span>Nº pedido</span><strong>${data.npedido}</strong></div>
+    </div>
+    <div class="actions">
+      <a class="primary" href="planes.html">Ver planes</a>
+      <a class="secondary" href="terminos-contratacion-web.html">Documentación</a>
+      <button class="secondary" id="logoutBtn">Cerrar sesión</button>
+    </div>
+  `
+  const logoutBtn = document.getElementById("logoutBtn")
+  logoutBtn.addEventListener("click",()=>{
+    localStorage.removeItem("clientData")
+    window.location.href = "login.html"
   })
-  script.src = `${URL_API}?${params.toString()}`
-  script.onerror = () => {
-    if(status) status.textContent = "No se pudo conectar con el servidor."
-    alert("No se pudo conectar. Inténtalo de nuevo.")
-    delete window[callbackName]
-    script.remove()
-  }
-  document.body.appendChild(script)
-
-  loginTimeoutId = setTimeout(() => {
-    if(status) status.textContent = "Tiempo de espera agotado."
-    alert("No se pudo conectar. Inténtalo de nuevo.")
-    delete window[callbackName]
-    script.remove()
-  }, 12000)
+}else{
+  panel.innerHTML = `\
+    <h3>Acceso no disponible</h3>
+    <p class="empty">No hay una sesión activa. Inicia sesión para ver tu panel.</p>
+    <div class="actions">
+      <a class="primary" href="login.html">Ir a login</a>
+    </div>
+  `
 }
 </script>
 
