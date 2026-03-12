@@ -472,6 +472,18 @@ const panel = document.getElementById("panelContent")
 const raw = localStorage.getItem("clientData")
 if(raw){
   const data = JSON.parse(raw)
+  const planKey = String(data.plan || '').toLowerCase()
+  let planDoc = ''
+  if(planKey.includes('basic')){
+    planDoc = '<a class=\"secondary\" href=\"TyC-LuckyWeb-Basic.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">TyC LuckyWeb Basic</a>'
+  }else if(planKey.includes('corporativa')){
+    planDoc = '<a class=\"secondary\" href=\"TyC-LuckyWeb-Corporativa.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">TyC LuckyWeb Corporativa</a>'
+  }else if(planKey.includes('ecommerce') || planKey.includes('e-commerce')){
+    planDoc = '<a class=\"secondary\" href=\"TyC-LuckyWeb-Ecommerce.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">TyC LuckyWeb Ecommerce</a>'
+  }else{
+    planDoc = '<a class=\"secondary\" href=\"terminos-contratacion-web.html\">Ver documentación completa</a>'
+  }
+
   panel.innerHTML = `\
     <h3>Bienvenido, ${data.user}</h3>
     <div class="details">
@@ -482,7 +494,10 @@ if(raw){
     </div>
     <div class="actions">
       <a class="primary" href="planes.html">Ver planes</a>
-      <a class="secondary" href="terminos-contratacion-web.html">Documentación</a>
+      ${planDoc}
+      <a class="secondary" href="REQUERIMIENTOS-WEBS.pdf" target="_blank" rel="noopener noreferrer">Requerimientos</a>
+      <a class="secondary" href="TyC-Dominios-Web.pdf" target="_blank" rel="noopener noreferrer">TyC Dominios Web</a>
+      <a class="secondary" href="AVISO LEGAL Y CONDICIONES DE USO.pdf" target="_blank" rel="noopener noreferrer">Aviso Legal</a>
       <button class="secondary" id="logoutBtn">Cerrar sesión</button>
     </div>
   `

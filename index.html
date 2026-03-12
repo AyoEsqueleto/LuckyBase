@@ -93,6 +93,7 @@ align-items:center;
 padding:20px 8%;
 box-shadow:0 5px 20px rgba(0,0,0,0.05);
 z-index:1000;
+flex-wrap:wrap;
 }
 
 .logo{
@@ -110,12 +111,26 @@ width:auto;
 display:block;
 }
 
+@media(max-width:980px){
+.logo img{
+height:44px;
+}
+}
+
 nav a{
-margin-left:30px;
+margin-left:0;
 text-decoration:none;
 color:#333;
 font-weight:500;
 position:relative;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+row-gap:6px;
+column-gap:18px;
+justify-content:flex-end;
 }
 
 nav a::after{
@@ -131,6 +146,52 @@ transition:0.3s;
 
 nav a:hover::after{
 width:100%;
+}
+
+.nav-login{
+padding:6px 12px;
+border-radius:999px;
+background:#1565ff;
+color:#fff;
+font-weight:600;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:fit-content;
+}
+
+@media(max-width:1200px){
+nav{
+column-gap:12px;
+}
+
+nav a{
+font-size:14px;
+}
+
+.nav-login{
+margin:6px auto 0;
+flex:0 0 100%;
+}
+}
+
+nav a.nav-login::after{
+display:none;
+}
+
+.nav-login:hover{
+background:#0e49c9;
+}
+
+.nav-toggle{
+display:none;
+border:none;
+background:#1565ff;
+color:#fff;
+padding:8px 12px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
 }
 
 .theme-toggle{
@@ -808,6 +869,19 @@ body.dark-mode nav a{
 color:#e5e7eb;
 }
 
+body.dark-mode .nav-login{
+background:#3b82f6;
+color:#fff;
+}
+
+body.dark-mode .nav-login:hover{
+background:#2563eb;
+}
+
+body.dark-mode .nav-toggle{
+background:#3b82f6;
+}
+
 body.dark-mode .theme-toggle{
 background:#1f2937;
 border-color:#374151;
@@ -997,13 +1071,14 @@ align-items:center;
 nav{
 order:3;
 width:100%;
-display:flex;
-flex-wrap:nowrap;
-justify-content:flex-start;
-gap:10px;
-overflow-x:auto;
-padding-bottom:2px;
--webkit-overflow-scrolling:touch;
+display:none;
+flex-direction:column;
+align-items:center;
+gap:8px;
+padding:10px 0 4px;
+background:#fff;
+border-radius:12px;
+box-shadow:0 12px 30px rgba(15,23,42,0.12);
 }
 
 nav a{
@@ -1011,6 +1086,22 @@ margin-left:0;
 font-size:13px;
 white-space:nowrap;
 flex:0 0 auto;
+}
+
+#mainNav.is-open{
+display:flex;
+}
+
+.nav-login{
+padding:6px 10px;
+margin:0;
+flex:0 0 auto;
+}
+
+.nav-toggle{
+display:inline-flex;
+align-items:center;
+justify-content:center;
 }
 
 .discord-banner{
@@ -1178,7 +1269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <img src="LUCKYBASE logo letras.png" alt="Logo Lucky Base">
 </div>
 
-<nav>
+<nav id="mainNav">
 
 <a href="#inicio">Inicio</a>
 <a href="#quehacemos">Qué hacemos</a>
@@ -1188,10 +1279,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a href="#about">Nosotros</a>
 <a href="#faq">FAQ</a>
 <a href="#contacto">Contacto</a>
-<a href="login.html">Iniciar sesión</a>
+<a class="nav-login" href="login.html">Iniciar sesión</a>
 
 </nav>
 
+<button id="navToggle" class="nav-toggle" type="button" aria-label="Abrir menú">Menú</button>
 <button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema"></button>
 
 </header>
@@ -1519,7 +1611,27 @@ const heroMetrics=document.querySelector(".hero-metrics")
 const parallaxOrbs=document.querySelectorAll(".hero-orb[data-parallax]")
 const brandTitle=document.getElementById("brandTitle")
 const brandDynamic=document.getElementById("brandDynamic")
+const mainNav=document.getElementById("mainNav")
+const navToggle=document.getElementById("navToggle")
 const prefersReducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+if(navToggle && mainNav){
+  navToggle.addEventListener("click",()=>{
+    const isOpen=mainNav.classList.toggle("is-open")
+    navToggle.setAttribute("aria-label",isOpen?"Cerrar menú":"Abrir menú")
+    navToggle.textContent=isOpen?"Cerrar":"Menú"
+  })
+
+  mainNav.querySelectorAll("a").forEach((link)=>{
+    link.addEventListener("click",()=>{
+      if(window.innerWidth<=768){
+        mainNav.classList.remove("is-open")
+        navToggle.setAttribute("aria-label","Abrir menú")
+        navToggle.textContent="Menú"
+      }
+    })
+  })
+}
 
 function sleep(ms){
 return new Promise((resolve)=>window.setTimeout(resolve,ms))
