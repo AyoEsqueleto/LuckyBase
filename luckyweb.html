@@ -70,13 +70,18 @@ body{
 html.is-locked,
 body.is-locked{
   overflow:hidden;
+  overscroll-behavior:none;
+  height:100%;
 }
 
 body.is-locked{
-  height:100vh;
+  min-height:100vh;
   position:fixed;
   width:100%;
+  left:0;
+  right:0;
   top:var(--lock-top,0px);
+  touch-action:none;
 }
 
 img{max-width:100%;height:auto;}
@@ -111,14 +116,20 @@ section{
   pointer-events:none;
 }
 
+body.is-animating .hero-inner,
+body.is-animating .hero-visual{
+  opacity:0;
+  transform:translateY(16px) scale(0.98);
+}
+
 body.is-loaded .hero-inner{
   animation:heroIn 0.9s ease forwards;
-  will-change:transform,filter;
+  will-change:transform,opacity;
 }
 
 body.is-loaded .hero-visual{
   animation:heroIn 0.9s ease 0.18s forwards;
-  will-change:transform,filter;
+  will-change:transform,opacity;
 }
 
 .code-backdrop{
@@ -985,8 +996,13 @@ footer{
 }
 
 @keyframes heroIn{
-  from{transform:translateY(18px);filter:blur(2px);}
-  to{transform:translateY(0);filter:blur(0);}
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes heroInMobile{
+  from{opacity:0;transform:translateY(12px) scale(0.985);}
+  to{opacity:1;transform:translateY(0) scale(1);}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1030,6 +1046,16 @@ footer{
 
   .track-viewport{
     padding:16px;
+  }
+}
+
+@media (max-width:768px){
+  body.is-loaded .hero-inner{
+    animation:heroInMobile 0.65s cubic-bezier(0.2,0.8,0.2,1) forwards;
+  }
+
+  body.is-loaded .hero-visual{
+    animation:heroInMobile 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.08s forwards;
   }
 }
 
@@ -1588,23 +1614,50 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const revealTargets = document.querySelectorAll("[data-reveal]")
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("is-loaded")
-  if (!prefersReducedMotion && window.innerWidth <= 768) {
+  const shouldAnimateHero = !prefersReducedMotion
+  if (shouldAnimateHero) {
+    document.body.classList.add("is-animating")
+    window.requestAnimationFrame(() => {
+      document.body.classList.add("is-loaded")
+    })
+  } else {
+    document.body.classList.add("is-loaded")
+  }
+
+  const lockDuration = window.innerWidth <= 768 ? 900 : 1100
+
+  if (shouldAnimateHero && window.innerWidth <= 768) {
     let lockScrollY = window.scrollY || 0
+    const preventScroll = (event) => {
+      event.preventDefault()
+    }
     const lockScroll = () => {
       lockScrollY = window.scrollY || 0
       document.documentElement.classList.add("is-locked")
       document.body.classList.add("is-locked")
       document.body.style.setProperty("--lock-top", `-${lockScrollY}px`)
+      document.body.style.touchAction = "none"
+      document.documentElement.style.touchAction = "none"
+      document.addEventListener("touchmove", preventScroll, { passive: false })
+      document.addEventListener("wheel", preventScroll, { passive: false })
     }
     const unlockScroll = () => {
       document.documentElement.classList.remove("is-locked")
       document.body.classList.remove("is-locked")
       document.body.style.removeProperty("--lock-top")
+      document.body.style.removeProperty("touch-action")
+      document.documentElement.style.removeProperty("touch-action")
+      document.removeEventListener("touchmove", preventScroll, { passive: false })
+      document.removeEventListener("wheel", preventScroll, { passive: false })
+      document.body.classList.remove("is-animating")
       window.scrollTo(0, lockScrollY)
     }
     lockScroll()
-    window.setTimeout(unlockScroll, 1100)
+    window.setTimeout(unlockScroll, lockDuration)
+  } else if (shouldAnimateHero) {
+    window.setTimeout(() => {
+      document.body.classList.remove("is-animating")
+    }, lockDuration)
   }
 })
 
