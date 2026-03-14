@@ -76,12 +76,11 @@ body.is-locked{
 
 body.is-locked{
   min-height:100vh;
-  position:fixed;
-  width:100%;
-  left:0;
-  right:0;
-  top:var(--lock-top,0px);
   touch-action:none;
+}
+
+body.is-locked iframe{
+  pointer-events:none;
 }
 
 img{max-width:100%;height:auto;}
@@ -1005,6 +1004,11 @@ footer{
   to{opacity:1;transform:translateY(0) scale(1);}
 }
 
+@keyframes heroFade{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
 @media (prefers-reduced-motion: reduce){
   *{
     animation:none !important;
@@ -1050,12 +1054,31 @@ footer{
 }
 
 @media (max-width:768px){
+  .code-layer{
+    animation:none;
+    transform:translateY(0);
+    opacity:0.25;
+  }
+
+  .hero-shot{
+    box-shadow:0 18px 40px rgba(0,0,0,0.28);
+  }
+
+  .device-frame{
+    animation:none;
+  }
+
+  body.is-animating .hero-inner,
+  body.is-animating .hero-visual{
+    transform:none;
+  }
+
   body.is-loaded .hero-inner{
-    animation:heroInMobile 0.65s cubic-bezier(0.2,0.8,0.2,1) forwards;
+    animation:heroFade 0.45s ease forwards;
   }
 
   body.is-loaded .hero-visual{
-    animation:heroInMobile 0.65s cubic-bezier(0.2,0.8,0.2,1) 0.08s forwards;
+    animation:heroFade 0.5s ease 0.12s forwards;
   }
 }
 
@@ -1208,14 +1231,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="before-card before reveal" data-reveal>
           <div class="before-badge">Antes</div>
           <div class="before-mock">
-            <iframe src="mini-webs/antes.html" title="Mini web antes"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/antes.html" title="Mini web antes" loading="lazy"></iframe>
           </div>
           <p>Contenido sin jerarquia clara y llamadas a la accion poco visibles.</p>
         </article>
         <article class="before-card after reveal" data-reveal>
           <div class="before-badge">Despues</div>
           <div class="before-mock">
-            <iframe src="mini-webs/despues.html" title="Mini web despues"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/despues.html" title="Mini web despues" loading="lazy"></iframe>
           </div>
           <p>Mensaje principal, visual destacado y CTA que guia a la conversion.</p>
         </article>
@@ -1238,7 +1261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Estructura y jerarquia sin distracciones.</p>
           </div>
           <div class="process-visual-box">
-            <iframe src="mini-webs/wireframe.html" title="Wireframe"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/wireframe.html" title="Wireframe" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>Mapa de secciones</span>
@@ -1253,7 +1276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Color, tipografia y estilo alineado a la marca.</p>
           </div>
           <div class="process-visual-box dark">
-            <iframe src="mini-webs/diseno.html" title="Diseño visual"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/diseno.html" title="Diseño visual" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>UI final</span>
@@ -1268,7 +1291,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Codigo limpio, responsive y optimizado.</p>
           </div>
           <div class="process-visual-box">
-            <iframe src="mini-webs/desarrollo.html" title="Desarrollo"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/desarrollo.html" title="Desarrollo" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>HTML/CSS/JS</span>
@@ -1283,7 +1306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Pruebas, ajustes finales y publicacion.</p>
           </div>
           <div class="process-visual-box dark">
-            <iframe src="mini-webs/qa.html" title="QA"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/qa.html" title="QA" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>Test dispositivos</span>
@@ -1355,7 +1378,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-camera"></span>
               <span class="device-speaker"></span>
               <div class="device-screen">
-                <iframe src="index.html" title="LuckyBase home desktop" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" title="LuckyBase home desktop" loading="lazy"></iframe>
               </div>
             </div>
             <div class="device-stand"></div>
@@ -1365,7 +1388,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="device-mock tablet">
               <span class="device-camera" style="left:50%;transform:translateX(-50%);"></span>
               <div class="device-screen">
-                <iframe src="index.html" title="LuckyBase home tablet" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" title="LuckyBase home tablet" loading="lazy"></iframe>
               </div>
             </div>
             <figcaption>Tablet precisa</figcaption>
@@ -1375,7 +1398,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-notch"></span>
               <span class="device-button"></span>
               <div class="device-screen">
-                <iframe src="index.html" title="LuckyBase home movil" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" title="LuckyBase home movil" loading="lazy"></iframe>
               </div>
             </div>
             <figcaption>Movil fluido</figcaption>
@@ -1385,7 +1408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-camera"></span>
               <span class="device-speaker"></span>
               <div class="device-screen">
-                <iframe src="index.html" title="LuckyBase home widescreen" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" title="LuckyBase home widescreen" loading="lazy"></iframe>
               </div>
             </div>
             <div class="device-stand"></div>
@@ -1627,15 +1650,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const lockDuration = window.innerWidth <= 768 ? 900 : 1100
 
   if (shouldAnimateHero && window.innerWidth <= 768) {
-    let lockScrollY = window.scrollY || 0
     const preventScroll = (event) => {
       event.preventDefault()
     }
     const lockScroll = () => {
-      lockScrollY = window.scrollY || 0
       document.documentElement.classList.add("is-locked")
       document.body.classList.add("is-locked")
-      document.body.style.setProperty("--lock-top", `-${lockScrollY}px`)
       document.body.style.touchAction = "none"
       document.documentElement.style.touchAction = "none"
       document.addEventListener("touchmove", preventScroll, { passive: false })
@@ -1644,13 +1664,11 @@ window.addEventListener("DOMContentLoaded", () => {
     const unlockScroll = () => {
       document.documentElement.classList.remove("is-locked")
       document.body.classList.remove("is-locked")
-      document.body.style.removeProperty("--lock-top")
       document.body.style.removeProperty("touch-action")
       document.documentElement.style.removeProperty("touch-action")
       document.removeEventListener("touchmove", preventScroll, { passive: false })
       document.removeEventListener("wheel", preventScroll, { passive: false })
       document.body.classList.remove("is-animating")
-      window.scrollTo(0, lockScrollY)
     }
     lockScroll()
     window.setTimeout(unlockScroll, lockDuration)
@@ -1674,6 +1692,29 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   }, { threshold: 0.2 })
 
   revealTargets.forEach((el) => observer.observe(el))
+}
+
+const lazyIframes = document.querySelectorAll("iframe[data-src]")
+const loadIframe = (iframe) => {
+  const src = iframe.dataset.src
+  if (!src) return
+  iframe.src = src
+  iframe.removeAttribute("data-src")
+}
+
+if ("IntersectionObserver" in window) {
+  const iframeObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadIframe(entry.target)
+        obs.unobserve(entry.target)
+      }
+    })
+  }, { rootMargin: "200px 0px" })
+
+  lazyIframes.forEach((iframe) => iframeObserver.observe(iframe))
+} else {
+  lazyIframes.forEach(loadIframe)
 }
 
 const scrollSections = [...document.querySelectorAll("[data-scroll-section]")]
