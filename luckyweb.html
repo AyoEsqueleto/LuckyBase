@@ -67,9 +67,16 @@ body{
   overflow-x:hidden;
 }
 
+html.is-locked,
+body.is-locked{
+  overflow:hidden;
+}
+
 body.is-locked{
   height:100vh;
-  overflow:hidden;
+  position:fixed;
+  width:100%;
+  top:var(--lock-top,0px);
 }
 
 img{max-width:100%;height:auto;}
@@ -1011,8 +1018,8 @@ footer{
   }
 
   .device-story{
-    height:190vh;
-    padding:110px var(--page-pad);
+    height:150vh;
+    padding:90px var(--page-pad);
   }
 
   .device-story .sticky-stage{
@@ -1022,7 +1029,7 @@ footer{
   }
 
   .track-viewport{
-    padding:20px;
+    padding:16px;
   }
 }
 
@@ -1080,6 +1087,10 @@ footer{
     --mock-w:300px;
     --mock-h:190px;
     --scale:0.2;
+  }
+
+  .device-story{
+    height:140vh;
   }
 }
 </style>
@@ -1579,10 +1590,21 @@ const revealTargets = document.querySelectorAll("[data-reveal]")
 window.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("is-loaded")
   if (!prefersReducedMotion && window.innerWidth <= 768) {
-    document.body.classList.add("is-locked")
-    window.setTimeout(() => {
+    let lockScrollY = window.scrollY || 0
+    const lockScroll = () => {
+      lockScrollY = window.scrollY || 0
+      document.documentElement.classList.add("is-locked")
+      document.body.classList.add("is-locked")
+      document.body.style.setProperty("--lock-top", `-${lockScrollY}px`)
+    }
+    const unlockScroll = () => {
+      document.documentElement.classList.remove("is-locked")
       document.body.classList.remove("is-locked")
-    }, 1100)
+      document.body.style.removeProperty("--lock-top")
+      window.scrollTo(0, lockScrollY)
+    }
+    lockScroll()
+    window.setTimeout(unlockScroll, 1100)
   }
 })
 
