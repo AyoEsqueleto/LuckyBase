@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LuckyWeb: servicio de creacion de paginas web para negocios y cualquier persona que necesite presencia profesional.">
+<title>LuckyWeb | LuckyBase</title>
+<meta property="og:title" content="LuckyWeb | LuckyBase">
+<meta property="og:description" content="LuckyWeb: servicio de creacion de paginas web para negocios y cualquier persona que necesite presencia profesional.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://luckybase.es/luckyweb.html">
+<meta property="og:site_name" content="LuckyBase">
+<meta property="og:image" content="https://luckybase.es/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LuckyWeb | LuckyBase">
+<meta name="twitter:description" content="LuckyWeb: servicio de creacion de paginas web para negocios y cualquier persona que necesite presencia profesional.">
+<meta name="twitter:image" content="https://luckybase.es/og-image.png">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://luckybase.es/luckyweb.html">
+<link rel="apple-touch-icon" href="https://luckybase.es/apple-touch-icon.png">
+<link rel="icon" href="https://luckybase.es/favicon.ico" type="image/x-icon">
+<link rel="icon" sizes="32x32" href="https://luckybase.es/favicon-32x32.png">
+<link rel="icon" sizes="16x16" href="https://luckybase.es/favicon-16x16.png">
+<link rel="manifest" href="https://luckybase.es/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png" type="image/png">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K96JRDLJ');</script>
+<script src="https://app.termly.io/resource-blocker/b67905d0-e597-4cc6-8085-08908b2ef547?autoBlock=on"></script>
+<!-- End Google Tag Manager -->
+<style>
+:root{
+  --paper:#f4f4f2;
+  --ink:#0a0a0a;
+  --muted:#5b5b5b;
+  --accent:#0a74ff;
+  --accent-2:#00c2a8;
+  --line:rgba(10,10,10,0.12);
+  --card:#ffffff;
+  --shadow:0 30px 80px rgba(0,0,0,0.12);
+  --shadow-soft:0 14px 32px rgba(0,0,0,0.08);
+  --page-pad:clamp(20px,6vw,90px);
+  --max-width:1240px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Manrope",sans-serif;
+  background:radial-gradient(circle at top,#ffffff 0%,#f7f7f4 42%,#ecebe8 100%);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+img{max-width:100%;height:auto;}
+
+section{
+  padding:120px var(--page-pad);
+  scroll-margin-top:120px;
+}
+
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  margin:0 auto;
+}
+
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(280px,0.95fr) minmax(280px,1fr);
+  align-items:center;
+  gap:clamp(32px,6vw,90px);
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 75% 20%,rgba(10,116,255,0.12),transparent 45%);
+  pointer-events:none;
+}
+
+.hero-inner,
+.hero-visual{
+  opacity:0;
+  transform:translateY(28px);
+}
+
+body.is-loaded .hero-inner{
+  animation:heroIn 0.9s ease forwards;
+}
+
+body.is-loaded .hero-visual{
+  animation:heroIn 0.9s ease 0.18s forwards;
+}
+
+.code-backdrop{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  opacity:0.55;
+  pointer-events:none;
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,0.9) 28%,rgba(0,0,0,0.9) 72%,transparent 100%);
+}
+
+.code-layer{
+  position:absolute;
+  top:-20%;
+  left:-5%;
+  width:110%;
+  font-family:"JetBrains Mono",monospace;
+  font-size:12px;
+  line-height:1.7;
+  color:rgba(10,10,10,0.35);
+  letter-spacing:0.2px;
+  animation:codeFlow 26s linear infinite;
+}
+
+.code-layer span{display:block;}
+
+.code-layer.layer-b{
+  top:10%;
+  opacity:0.35;
+  animation-duration:34s;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:0.45em;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(44px,8vw,96px);
+  line-height:0.95;
+  margin-bottom:20px;
+}
+
+.hero .lead{
+  font-size:clamp(18px,2.2vw,22px);
+  color:#2a2a2a;
+  max-width:560px;
+  margin-bottom:20px;
+}
+
+.hook{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:14px;
+  border:1px solid rgba(10,116,255,0.25);
+  background:rgba(10,116,255,0.08);
+  color:#0b1b3a;
+  font-weight:600;
+  max-width:560px;
+  margin-bottom:28px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:38px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 26px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:0.2px;
+  transition:all 0.25s ease;
+}
+
+.btn.primary{
+  background:var(--ink);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 30px rgba(0,0,0,0.18);
+}
+
+.btn.ghost{
+  border:1px solid var(--line);
+  color:var(--ink);
+  background:#fff;
+}
+
+.btn.ghost:hover{
+  border-color:var(--ink);
+}
+
+.hero-specs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:16px;
+}
+
+.spec{
+  padding:16px 18px;
+  border-radius:16px;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+}
+
+.spec span{
+  font-size:12px;
+  letter-spacing:0.3px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.spec strong{
+  display:block;
+  margin-top:6px;
+  font-size:18px;
+  font-family:"Space Grotesk",sans-serif;
+}
+
+.hero-visual{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.hero-shot{
+  width:min(580px,92%);
+  border-radius:28px;
+  padding:14px;
+  background:linear-gradient(145deg,#111217,#0b0d12);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 26px 60px rgba(0,0,0,0.35);
+}
+
+.hero-shot iframe{
+  display:block;
+  width:100%;
+  height:360px;
+  border:0;
+  border-radius:18px;
+  background:#ffffff;
+}
+
+.trust-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  font-size:11px;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:#6b7280;
+}
+
+.before-after{
+  background:#f8f8f6;
+}
+
+.before-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+  margin-top:36px;
+}
+
+.before-card{
+  border-radius:22px;
+  padding:20px;
+  border:1px solid var(--line);
+  background:#ffffff;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.before-card.before{
+  background:#f1f3f6;
+}
+
+.before-card.after{
+  background:linear-gradient(135deg,#ffffff,#eaf1ff);
+  border-color:rgba(10,116,255,0.2);
+}
+
+.before-badge{
+  font-size:11px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:#6b7280;
+}
+
+.before-card.after .before-badge{
+  color:#1d4ed8;
+}
+
+.before-mock{
+  border-radius:18px;
+  background:#ffffff;
+  border:1px solid rgba(10,10,10,0.08);
+  overflow:hidden;
+}
+
+.before-mock iframe{
+  width:100%;
+  height:220px;
+  border:0;
+  display:block;
+  background:#ffffff;
+}
+
+.process-visual{
+  background:#ffffff;
+}
+
+.process-timeline{
+  display:grid;
+  gap:22px;
+  margin-top:36px;
+}
+
+.process-step{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:20px;
+  padding:22px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow:var(--shadow-soft);
+}
+
+.process-step .step-label{
+  font-size:12px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:#6b7280;
+}
+
+.process-step .step-title{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:20px;
+  margin:6px 0 8px;
+}
+
+.process-step p{
+  color:#4b5563;
+  font-size:14px;
+}
+
+.process-visual-box{
+  border-radius:16px;
+  overflow:hidden;
+  background:#ffffff;
+  border:1px solid var(--line);
+}
+
+.process-visual-box.dark{
+  background:#0b0f1a;
+  border-color:rgba(255,255,255,0.08);
+}
+
+.process-visual-box iframe{
+  width:100%;
+  height:160px;
+  border:0;
+  display:block;
+  background:#ffffff;
+}
+
+.process-deliverables{
+  margin-top:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  font-size:12px;
+  color:#6b7280;
+}
+
+.process-deliverables span{
+  padding:6px 10px;
+  border-radius:999px;
+  background:#f3f4f6;
+}
+
+@media (max-width:768px){
+  .process-step{
+    grid-template-columns:1fr;
+  }
+}
+
+.hero-caption{
+  font-size:13px;
+  letter-spacing:0.26em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.section-head{
+  max-width:760px;
+}
+
+.section-head h2{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(30px,4vw,54px);
+  margin:12px 0 18px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:clamp(16px,2vw,19px);
+}
+
+.explain-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:24px;
+  margin-top:48px;
+}
+
+.explain-card{
+  padding:28px;
+  border-radius:20px;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  transition:transform 0.35s ease,box-shadow 0.35s ease;
+}
+
+.explain-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 40px rgba(0,0,0,0.12);
+}
+
+.explain-icon{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(10,116,255,0.08);
+  color:var(--accent);
+}
+
+.explain-card h3{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:20px;
+}
+
+.device-story{
+  position:relative;
+  padding:0 var(--page-pad);
+  height:240vh;
+  background:#0b0c0f;
+  color:#f5f5f5;
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.device-story .sticky-stage{
+  position:sticky;
+  top:90px;
+  min-height:calc(100vh - 90px);
+  display:grid;
+  grid-template-columns:minmax(220px,0.35fr) minmax(0,1fr);
+  gap:40px;
+  align-items:center;
+}
+
+.device-copy{
+  max-width:320px;
+}
+
+.device-copy .eyebrow{
+  color:rgba(255,255,255,0.5);
+}
+
+.device-copy p{
+  color:rgba(255,255,255,0.7);
+}
+
+.track-viewport{
+  overflow:hidden;
+  border-radius:28px;
+  background:linear-gradient(140deg,#121318,#0b0c0f);
+  padding:32px;
+  box-shadow:0 30px 70px rgba(0,0,0,0.45);
+}
+
+.scroll-track{
+  display:flex;
+  gap:28px;
+  width:max-content;
+  will-change:transform;
+  padding:0 12px;
+}
+
+.device-frame{
+  min-width:360px;
+  background:transparent;
+  border-radius:22px;
+  padding:0;
+  border:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  --mock-w:360px;
+  --mock-h:220px;
+  --bezel:14px;
+  --mock-r:24px;
+  --iframe-w:1280px;
+  --iframe-h:720px;
+  --scale:0.32;
+  --iframe-top:0px;
+  --iframe-left:0px;
+  animation:deviceFloat 8s ease-in-out infinite;
+  animation-delay:var(--float-delay,0s);
+}
+
+.device-mock{
+  position:relative;
+  width:var(--mock-w);
+  height:var(--mock-h);
+  border-radius:var(--mock-r);
+  padding:var(--bezel);
+  background:linear-gradient(145deg,#1a1d26,#0b0d12);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 26px 60px rgba(0,0,0,0.5);
+}
+
+.device-mock::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:calc(var(--mock-r) - 6px);
+  border:1px solid rgba(255,255,255,0.06);
+  pointer-events:none;
+}
+
+.device-mock.desktop{
+  background:linear-gradient(145deg,#1f2430,#0b0d12);
+}
+
+.device-mock.tablet{
+  background:linear-gradient(145deg,#151926,#0b0d12);
+}
+
+.device-mock.phone{
+  background:linear-gradient(145deg,#10131c,#090a0f);
+}
+
+.device-screen{
+  width:100%;
+  height:100%;
+  border-radius:calc(var(--mock-r) - var(--bezel));
+  overflow:hidden;
+  background:#0c0d11;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 12px 24px rgba(0,0,0,0.35);
+  position:relative;
+}
+
+.device-screen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.08),transparent 30%,transparent 70%,rgba(0,0,0,0.25));
+  pointer-events:none;
+}
+
+.device-screen iframe{
+  position:absolute;
+  top:var(--iframe-top);
+  left:var(--iframe-left);
+  width:var(--iframe-w);
+  height:var(--iframe-h);
+  border:0;
+  transform:scale(var(--scale));
+  transform-origin:top left;
+  pointer-events:none;
+  background:#fff;
+}
+
+.device-camera{
+  position:absolute;
+  top:8px;
+  left:12px;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#1f2937;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 0 3px rgba(0,0,0,0.35) inset;
+  z-index:2;
+}
+
+.device-speaker{
+  position:absolute;
+  top:9px;
+  left:28px;
+  width:62px;
+  height:6px;
+  border-radius:999px;
+  background:#1f2937;
+  opacity:0.7;
+  z-index:2;
+}
+
+.device-notch{
+  position:absolute;
+  top:4px;
+  left:50%;
+  transform:translateX(-50%);
+  width:76px;
+  height:18px;
+  border-radius:0 0 12px 12px;
+  background:#0b0d12;
+  border:1px solid rgba(255,255,255,0.08);
+  z-index:2;
+}
+
+.device-button{
+  position:absolute;
+  right:-5px;
+  top:78px;
+  width:4px;
+  height:40px;
+  border-radius:999px;
+  background:#2a2f3a;
+  box-shadow:0 56px 0 #2a2f3a;
+  z-index:1;
+}
+
+.device-stand{
+  width:140px;
+  height:12px;
+  border-radius:999px;
+  background:#1a1c24;
+  box-shadow:0 12px 24px rgba(0,0,0,0.35);
+}
+
+.frame-desktop{
+  --mock-w:440px;
+  --mock-h:260px;
+  --iframe-w:1280px;
+  --iframe-h:720px;
+  --scale:0.32;
+}
+
+.frame-tablet{
+  --mock-w:320px;
+  --mock-h:250px;
+  --bezel:12px;
+  --mock-r:28px;
+  --iframe-w:1024px;
+  --iframe-h:768px;
+  --scale:0.289;
+}
+
+.frame-phone{
+  --mock-w:220px;
+  --mock-h:460px;
+  --bezel:9px;
+  --mock-r:34px;
+  --iframe-w:390px;
+  --iframe-h:844px;
+  --scale:0.5;
+  --iframe-top:4px;
+}
+
+.frame-wide{
+  --mock-w:380px;
+  --mock-h:240px;
+  --iframe-w:1440px;
+  --iframe-h:900px;
+  --scale:0.236;
+}
+
+.device-frame figcaption{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:0.25em;
+  color:rgba(255,255,255,0.6);
+}
+
+.plans{
+  background:#f6f6f4;
+}
+
+.plan-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+  margin-top:48px;
+}
+
+.plan-card{
+  padding:26px;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.plan-card h3{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:22px;
+}
+
+.plan-card ul{
+  padding-left:18px;
+  color:#4b5563;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.plan-card a{
+  text-decoration:none;
+  font-weight:600;
+  color:#fff;
+  background:var(--ink);
+  padding:10px 14px;
+  border-radius:10px;
+  width:max-content;
+}
+
+.compare{
+  margin-top:40px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  overflow:auto;
+}
+
+.compare table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:640px;
+}
+
+.compare th,
+.compare td{
+  padding:12px 14px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  font-size:14px;
+}
+
+.compare th{
+  background:#f2f4f8;
+  color:#0f172a;
+  font-weight:700;
+}
+
+.compare .current{
+  background:#e0e7ff;
+  font-weight:700;
+}
+
+.docs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+  margin-top:32px;
+}
+
+.doc-card{
+  padding:22px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow:var(--shadow-soft);
+}
+
+.doc-card a{
+  display:inline-flex;
+  margin-top:12px;
+  text-decoration:none;
+  padding:9px 12px;
+  border-radius:8px;
+  background:#0a74ff;
+  color:#fff;
+  font-weight:600;
+  font-size:13px;
+}
+
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+  margin-top:44px;
+}
+
+.process-step{
+  padding:24px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--card);
+  box-shadow:var(--shadow-soft);
+}
+
+.step-number{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:26px;
+  color:var(--accent);
+}
+
+.cta{
+  background:#0a0a0a;
+  color:#fff;
+}
+
+.cta .section-head p{
+  color:rgba(255,255,255,0.7);
+}
+
+.cta-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:26px;
+}
+
+footer{
+  padding:40px var(--page-pad);
+  text-align:center;
+  color:#6b7280;
+  font-size:13px;
+  background:#ffffff;
+  border-top:1px solid var(--line);
+  position:relative;
+}
+
+.footer-copy{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.footer-copy img{
+  width:32px;
+  height:32px;
+  object-fit:contain;
+}
+
+.footer-socials{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.footer-instagram{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#0b0c0f;
+  color:#ffffff;
+  text-decoration:none;
+  transition:transform 0.2s ease,background 0.2s ease;
+}
+
+.footer-instagram:hover{
+  transform:scale(1.06);
+  background:#1f2937;
+}
+
+.footer-instagram svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+.footer-preferences{
+  display:inline-block;
+  margin-top:12px;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#0a0a0a;
+  color:#ffffff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  transition:background 0.2s ease;
+}
+
+.footer-preferences:hover{
+  background:#111827;
+}
+
+.footer-legal{
+  margin-top:10px;
+}
+
+.footer-legal a{
+  color:#4b5563;
+  font-size:13px;
+  text-decoration:none;
+}
+
+.footer-legal a:hover{
+  text-decoration:underline;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes codeFlow{
+  0%{transform:translateY(0);} 
+  100%{transform:translateY(240px);} 
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);} 
+  50%{transform:translateY(-18px);} 
+}
+
+@keyframes deviceFloat{
+  0%,100%{transform:translateY(0);} 
+  50%{transform:translateY(-10px);} 
+}
+
+@keyframes heroIn{
+  to{opacity:1;transform:translateY(0);}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+
+  .hero-inner,
+  .hero-visual{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media (max-width:980px){
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:150px;
+  }
+
+  .hero-visual{
+    order:-1;
+  }
+
+  .device-story{
+    height:auto;
+    padding:120px var(--page-pad);
+  }
+
+  .device-story .sticky-stage{
+    position:relative;
+    top:auto;
+    grid-template-columns:1fr;
+  }
+
+  .track-viewport{
+    padding:20px;
+  }
+
+  .scroll-track{
+    transform:translateX(0) !important;
+  }
+}
+
+@media (max-width:640px){
+  section{
+    padding:90px var(--page-pad);
+  }
+
+  .hero-actions,
+  .cta-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    width:100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K96JRDLJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="code-backdrop" aria-hidden="true">
+      <div class="code-layer layer-a">
+        <span>&lt;section class="hero"&gt;</span>
+        <span>&nbsp;&nbsp;&lt;h1&gt;LuckyWeb&lt;/h1&gt;</span>
+        <span>&nbsp;&nbsp;&lt;p&gt;Servicio de creacion web&lt;/p&gt;</span>
+        <span>&nbsp;&nbsp;&lt;button&gt;Solicitar propuesta&lt;/button&gt;</span>
+        <span>&lt;/section&gt;</span>
+        <span>&lt;section class="story"&gt;</span>
+        <span>&nbsp;&nbsp;&lt;div class="motion"&gt;Scroll cinematic&lt;/div&gt;</span>
+        <span>&lt;/section&gt;</span>
+        <span>&lt;section class="plans"&gt;</span>
+        <span>&nbsp;&nbsp;&lt;article class="plan"&gt;Basic&lt;/article&gt;</span>
+        <span>&nbsp;&nbsp;&lt;article class="plan"&gt;Corporativa&lt;/article&gt;</span>
+        <span>&nbsp;&nbsp;&lt;article class="plan"&gt;Ecommerce&lt;/article&gt;</span>
+        <span>&lt;/section&gt;</span>
+      </div>
+      <div class="code-layer layer-b">
+        <span>&lt;main id="luckyweb"&gt;</span>
+        <span>&nbsp;&nbsp;&lt;article class="product"&gt;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="render"&gt;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;svg viewBox="0 0 480 320"&gt;...&lt;/svg&gt;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</span>
+        <span>&nbsp;&nbsp;&lt;/article&gt;</span>
+        <span>&lt;/main&gt;</span>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <p class="eyebrow">Servicio LuckyWeb</p>
+      <h1>LuckyWeb</h1>
+      <p class="lead">Servicio de creacion de paginas web para negocios y cualquier persona que necesite presencia profesional. Diseño, rendimiento y narrativa con estilo de lanzamiento.</p>
+      <p class="hook">Convierte visitas en clientes desde el primer dia. Tu web lista para vender, reservar o captar leads.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contacto">Solicitar propuesta</a>
+        <a class="btn ghost" href="#planes">Ver planes</a>
+        <a class="btn ghost" href="index.html">Volver a LuckyBase</a>
+      </div>
+      <div class="hero-specs">
+        <div class="spec">
+          <span>Diseño</span>
+          <strong>Visuales a medida</strong>
+        </div>
+        <div class="spec">
+          <span>Velocidad</span>
+          <strong>Core Web Vitals</strong>
+        </div>
+        <div class="spec">
+          <span>Estrategia</span>
+          <strong>Conversion clara</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <figure class="hero-shot">
+        <iframe src="mini-webs/hero.html" title="Mini web LuckyWeb"></iframe>
+      </figure>
+      <div class="hero-caption">Hero real</div>
+      <div class="trust-row">
+        <span>Negocios locales</span>
+        <span>Reservas</span>
+        <span>Leads</span>
+        <span>Ventas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="before-after" id="antes-despues">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Antes / Despues</p>
+        <h2>La diferencia se ve al primer scroll.</h2>
+        <p>Comparamos una web generica con una propuesta LuckyWeb: mas orden, mas jerarquia y mas foco en conversion.</p>
+      </div>
+      <div class="before-grid">
+        <article class="before-card before reveal" data-reveal>
+          <div class="before-badge">Antes</div>
+          <div class="before-mock">
+            <iframe src="mini-webs/antes.html" title="Mini web antes"></iframe>
+          </div>
+          <p>Contenido sin jerarquia clara y llamadas a la accion poco visibles.</p>
+        </article>
+        <article class="before-card after reveal" data-reveal>
+          <div class="before-badge">Despues</div>
+          <div class="before-mock">
+            <iframe src="mini-webs/despues.html" title="Mini web despues"></iframe>
+          </div>
+          <p>Mensaje principal, visual destacado y CTA que guia a la conversion.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-visual" id="proceso-visual">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Proceso visual</p>
+        <h2>Entregables claros en cada etapa.</h2>
+        <p>Un timeline real con piezas visibles: wireframe, diseño, desarrollo y QA.</p>
+      </div>
+      <div class="process-timeline">
+        <article class="process-step reveal" data-reveal>
+          <div>
+            <div class="step-label">Paso 01</div>
+            <div class="step-title">Wireframe</div>
+            <p>Estructura y jerarquia sin distracciones.</p>
+          </div>
+          <div class="process-visual-box">
+            <iframe src="mini-webs/wireframe.html" title="Wireframe"></iframe>
+          </div>
+          <div class="process-deliverables">
+            <span>Mapa de secciones</span>
+            <span>Flujo de usuario</span>
+            <span>Jerarquia visual</span>
+          </div>
+        </article>
+        <article class="process-step reveal" data-reveal>
+          <div>
+            <div class="step-label">Paso 02</div>
+            <div class="step-title">Diseño visual</div>
+            <p>Color, tipografia y estilo alineado a la marca.</p>
+          </div>
+          <div class="process-visual-box dark">
+            <iframe src="mini-webs/diseno.html" title="Diseño visual"></iframe>
+          </div>
+          <div class="process-deliverables">
+            <span>UI final</span>
+            <span>Componentes</span>
+            <span>Guia visual</span>
+          </div>
+        </article>
+        <article class="process-step reveal" data-reveal>
+          <div>
+            <div class="step-label">Paso 03</div>
+            <div class="step-title">Desarrollo</div>
+            <p>Codigo limpio, responsive y optimizado.</p>
+          </div>
+          <div class="process-visual-box">
+            <iframe src="mini-webs/desarrollo.html" title="Desarrollo"></iframe>
+          </div>
+          <div class="process-deliverables">
+            <span>HTML/CSS/JS</span>
+            <span>Responsive</span>
+            <span>SEO tecnico</span>
+          </div>
+        </article>
+        <article class="process-step reveal" data-reveal>
+          <div>
+            <div class="step-label">Paso 04</div>
+            <div class="step-title">QA y entrega</div>
+            <p>Pruebas, ajustes finales y publicacion.</p>
+          </div>
+          <div class="process-visual-box dark">
+            <iframe src="mini-webs/qa.html" title="QA"></iframe>
+          </div>
+          <div class="process-deliverables">
+            <span>Test dispositivos</span>
+            <span>Revision final</span>
+            <span>Go live</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="que-es">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Que es LuckyWeb</p>
+        <h2>Webs con ritmo de keynote.</h2>
+        <p>LuckyWeb es un servicio completo de creacion de paginas web para negocios y personas que necesitan presencia digital con impacto y claridad.</p>
+      </div>
+      <div class="explain-grid">
+        <article class="explain-card reveal" data-reveal>
+          <div class="explain-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 7h16"></path>
+              <path d="M4 12h10"></path>
+              <path d="M4 17h6"></path>
+              <circle cx="18" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <h3>Storytelling claro</h3>
+          <p>Mensajes directos, estructura limpia y un recorrido que guia al usuario hacia la accion.</p>
+        </article>
+        <article class="explain-card reveal" data-reveal>
+          <div class="explain-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="14" rx="3"></rect>
+              <path d="M7 21h10"></path>
+              <path d="M12 17v4"></path>
+            </svg>
+          </div>
+          <h3>Visuales propios</h3>
+          <p>Ilustraciones y dispositivos creados a medida para que tu web se sienta unica.</p>
+        </article>
+        <article class="explain-card reveal" data-reveal>
+          <div class="explain-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12h16"></path>
+              <path d="M12 4v16"></path>
+              <circle cx="12" cy="12" r="8"></circle>
+            </svg>
+          </div>
+          <h3>Movimiento medido</h3>
+          <p>Animaciones suaves para darle vida sin distraer del mensaje principal.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="device-story" id="adaptable" data-scroll-section>
+    <div class="sticky-stage container">
+      <div class="device-copy reveal" data-reveal>
+        <p class="eyebrow">Adaptable</p>
+        <h2>Una sola historia. Todos tus dispositivos.</h2>
+        <p>Scroll horizontal con multiples imagenes para mostrar como la web se adapta a cada pantalla en tiempo real.</p>
+      </div>
+      <div class="track-viewport">
+        <div class="scroll-track" data-scroll-track>
+          <figure class="device-frame frame-desktop" style="--float-delay:0s;">
+            <div class="device-mock desktop">
+              <span class="device-camera"></span>
+              <span class="device-speaker"></span>
+              <div class="device-screen">
+                <iframe src="index.html" title="LuckyBase home desktop" loading="lazy"></iframe>
+              </div>
+            </div>
+            <div class="device-stand"></div>
+            <figcaption>Desktop cinematic</figcaption>
+          </figure>
+          <figure class="device-frame frame-tablet" style="--float-delay:0.4s;">
+            <div class="device-mock tablet">
+              <span class="device-camera" style="left:50%;transform:translateX(-50%);"></span>
+              <div class="device-screen">
+                <iframe src="index.html" title="LuckyBase home tablet" loading="lazy"></iframe>
+              </div>
+            </div>
+            <figcaption>Tablet precisa</figcaption>
+          </figure>
+          <figure class="device-frame frame-phone" style="--float-delay:0.8s;">
+            <div class="device-mock phone">
+              <span class="device-notch"></span>
+              <span class="device-button"></span>
+              <div class="device-screen">
+                <iframe src="index.html" title="LuckyBase home movil" loading="lazy"></iframe>
+              </div>
+            </div>
+            <figcaption>Movil fluido</figcaption>
+          </figure>
+          <figure class="device-frame frame-wide" style="--float-delay:1.2s;">
+            <div class="device-mock desktop">
+              <span class="device-camera"></span>
+              <span class="device-speaker"></span>
+              <div class="device-screen">
+                <iframe src="index.html" title="LuckyBase home widescreen" loading="lazy"></iframe>
+              </div>
+            </div>
+            <div class="device-stand"></div>
+            <figcaption>Landing de marca</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans" id="planes">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Planes LuckyWeb</p>
+        <h2>Soluciones para cada etapa.</h2>
+        <p>Elige el plan que encaja con tu negocio o proyecto personal. Todos incluyen diseño cuidado y soporte claro.</p>
+      </div>
+      <div class="plan-grid">
+        <article class="plan-card reveal" data-reveal>
+          <h3>LuckyWeb Basic</h3>
+          <ul>
+            <li>Web informativa con hasta 5 secciones</li>
+            <li>Diseño limpio y directo</li>
+            <li>Optimizacion inicial para SEO</li>
+            <li>Entrega agil para empezar rapido</li>
+          </ul>
+          <a href="luckyweb-basic.html">Ver plan Basic</a>
+        </article>
+        <article class="plan-card reveal" data-reveal>
+          <h3>LuckyWeb Corporativa</h3>
+          <ul>
+            <li>Web corporativa con diseño personalizado</li>
+            <li>Secciones ampliadas y estructura solida</li>
+            <li>SEO on-page completo</li>
+            <li>Ideal para empresas en crecimiento</li>
+          </ul>
+          <a href="luckyweb-corporativa.html">Ver plan Corporativa</a>
+        </article>
+        <article class="plan-card reveal" data-reveal>
+          <h3>LuckyWeb Ecommerce</h3>
+          <ul>
+            <li>Tienda online completa y escalable</li>
+            <li>Pasarela de pago y checkout optimizado</li>
+            <li>Carga inicial de productos</li>
+            <li>Lista para vender desde el dia uno</li>
+          </ul>
+          <a href="luckyweb-ecommerce.html">Ver plan Ecommerce</a>
+        </article>
+      </div>
+
+      <div class="compare" id="comparador">
+        <table>
+          <thead>
+            <tr>
+              <th>Comparador rapido</th>
+              <th>Basic</th>
+              <th>Corporativa</th>
+              <th>Ecommerce</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Secciones / paginas</td>
+              <td>Hasta 5</td>
+              <td>Hasta 6 paginas</td>
+              <td>Catalogo + checkout</td>
+            </tr>
+            <tr>
+              <td>Diseño personalizado</td>
+              <td>No</td>
+              <td>Si</td>
+              <td>Si</td>
+            </tr>
+            <tr>
+              <td>SEO on-page</td>
+              <td>Basico</td>
+              <td>Completo</td>
+              <td>Completo</td>
+            </tr>
+            <tr>
+              <td>Ecommerce</td>
+              <td>No</td>
+              <td>No</td>
+              <td>Si</td>
+            </tr>
+            <tr>
+              <td>Ideal para</td>
+              <td>Empezar rapido</td>
+              <td>Empresas en crecimiento</td>
+              <td>Tiendas online</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="documentacion">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Documentacion</p>
+        <h2>Todo lo que necesitas antes de contratar.</h2>
+        <p>Documentos, requisitos y condiciones para cada plan LuckyWeb.</p>
+      </div>
+      <div class="docs-grid">
+        <div class="doc-card reveal" data-reveal>
+          <h3>TyC Basic</h3>
+          <p>Condiciones del plan LuckyWeb Basic.</p>
+          <a href="TyC-LuckyWeb-Basic.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+        <div class="doc-card reveal" data-reveal>
+          <h3>TyC Corporativa</h3>
+          <p>Condiciones del plan LuckyWeb Corporativa.</p>
+          <a href="TyC-LuckyWeb-Corporativa.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+        <div class="doc-card reveal" data-reveal>
+          <h3>TyC Ecommerce</h3>
+          <p>Condiciones del plan LuckyWeb Ecommerce.</p>
+          <a href="TyC-LuckyWeb-Ecommerce.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+        <div class="doc-card reveal" data-reveal>
+          <h3>Dominios Web</h3>
+          <p>Condiciones para dominios y registros.</p>
+          <a href="TyC-Dominios-Web.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+        <div class="doc-card reveal" data-reveal>
+          <h3>Requerimientos</h3>
+          <p>Checklist para iniciar tu proyecto.</p>
+          <a href="REQUERIMIENTOS-WEBS.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+        <div class="doc-card reveal" data-reveal>
+          <h3>Aviso Legal</h3>
+          <p>Condiciones generales de uso.</p>
+          <a href="AVISO LEGAL Y CONDICIONES DE USO.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Proceso</p>
+        <h2>Como trabajamos en LuckyWeb.</h2>
+        <p>Flujo claro, entregas ordenadas y revisiones contigo.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal" data-reveal>
+          <div class="step-number">01</div>
+          <h3>Briefing</h3>
+          <p>Definimos objetivos, publico y estructura.</p>
+        </div>
+        <div class="process-step reveal" data-reveal>
+          <div class="step-number">02</div>
+          <h3>Diseño y contenido</h3>
+          <p>Creamos el layout, el estilo visual y el copy.</p>
+        </div>
+        <div class="process-step reveal" data-reveal>
+          <div class="step-number">03</div>
+          <h3>Desarrollo</h3>
+          <p>Construimos tu web con rendimiento optimizado.</p>
+        </div>
+        <div class="process-step reveal" data-reveal>
+          <div class="step-number">04</div>
+          <h3>Entrega</h3>
+          <p>Revision final y publicacion lista para crecer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <p class="eyebrow">Contacto</p>
+        <h2>Solicita tu LuckyWeb.</h2>
+        <p>Escribenos y te enviamos una propuesta adaptada a tu negocio o proyecto personal.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn primary" href="index.html#contacto">Quiero mi LuckyWeb</a>
+        <a class="btn ghost" href="comparador-planes-web.html">Ver comparador completo</a>
+        <a class="btn ghost" href="terminos-contratacion-web.html">Ver documentacion completa</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="footer-copy">
+    <img loading="lazy" src="logoluckyblancosinfondo.png" alt="Logo Lucky Base">
+    <span>(c) 2026 LuckyBase. Todos los derechos reservados.</span>
+  </p>
+
+  <div class="footer-socials">
+    <a class="footer-instagram" href="https://www.instagram.com/luckybaseofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Lucky Base">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect>
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <circle cx="18" cy="6" r="1.2" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+
+    <a class="footer-instagram" href="https://www.tiktok.com/@luckybaseofficial" target="_blank" rel="noopener noreferrer" aria-label="TikTok Lucky Base">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M14.5 3c.4 1.8 1.8 3.2 3.5 3.7v2.6c-1.4 0-2.7-.4-3.8-1.2v6.5c0 3.3-2.7 5.9-6 5.9s-6-2.6-6-5.9 2.7-5.9 6-5.9c.3 0 .7 0 1 .1v2.8c-.3-.1-.6-.2-1-.2-1.7 0-3.1 1.4-3.1 3.1s1.4 3.1 3.1 3.1 3.1-1.4 3.1-3.1V3h3.2z"></path>
+      </svg>
+    </a>
+
+    <a class="footer-instagram" href="https://discord.com/invite/GYJN7kEwU2" target="_blank" rel="noopener noreferrer" aria-label="Discord Lucky Base">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20 4.5a17.4 17.4 0 0 0-4.1-1.3 12.2 12.2 0 0 0-.5 1.1 16.8 16.8 0 0 0-6.8 0 12 12 0 0 0-.5-1.1A17.3 17.3 0 0 0 4 4.5C1.5 8 1 11.4 1.2 14.8c1.7 1.3 3.4 2.1 5.2 2.6.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.7-.8.1-.1.3-.2.4-.3 3.3 1.5 6.9 1.5 10.2 0 .1.1.3.2.4.3-.6.3-1.1.6-1.7.8.3.7.7 1.3 1.1 1.9 1.8-.5 3.5-1.3 5.2-2.6.3-3.9-.7-7.3-3.2-10.3zM8.5 13.1c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/>
+      </svg>
+    </a>
+  </div>
+
+  <a href="#" class="footer-preferences termly-display-preferences">Cambiar mis preferencias</a>
+
+  <div class="footer-legal">
+    <a href="privacy-policy.html">Politica de Privacidad</a>
+  </div>
+</footer>
+
+<script>
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+const revealTargets = document.querySelectorAll("[data-reveal]")
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("is-loaded")
+})
+
+if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  revealTargets.forEach((el) => el.classList.add("is-visible"))
+} else {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible")
+        obs.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.2 })
+
+  revealTargets.forEach((el) => observer.observe(el))
+}
+
+const scrollSections = [...document.querySelectorAll("[data-scroll-section]")]
+  .map((section) => {
+    const track = section.querySelector("[data-scroll-track]")
+    const viewport = section.querySelector(".track-viewport")
+    if (!track || !viewport) return null
+    return { section, track, viewport }
+  })
+  .filter(Boolean)
+
+let ticking = false
+
+function updateScrollTracks() {
+  scrollSections.forEach(({ section, track, viewport }) => {
+    const rect = section.getBoundingClientRect()
+    const total = rect.height - window.innerHeight
+    if (total <= 0) return
+    const startOffset = window.innerHeight * 0.2
+    const raw = Math.min(Math.max((-rect.top - startOffset) / total, 0), 1)
+    const eased = raw * raw * (3 - 2 * raw)
+    const maxTranslate = Math.max(track.scrollWidth - viewport.clientWidth, 0)
+    track.style.transform = `translate3d(${-maxTranslate * eased}px,0,0)`
+  })
+}
+
+function requestTick() {
+  if (ticking || prefersReducedMotion) return
+  ticking = true
+  window.requestAnimationFrame(() => {
+    updateScrollTracks()
+    ticking = false
+  })
+}
+
+if (!prefersReducedMotion) {
+  window.addEventListener("scroll", requestTick, { passive: true })
+  window.addEventListener("resize", requestTick)
+  requestTick()
+}
+</script>
+
+</body>
+</html>
