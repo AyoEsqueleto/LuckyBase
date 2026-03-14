@@ -99,12 +99,6 @@ section{
   pointer-events:none;
 }
 
-.hero-inner,
-.hero-visual{
-  opacity:0;
-  transform:translateY(28px);
-}
-
 body.is-loaded .hero-inner{
   animation:heroIn 0.9s ease forwards;
 }
@@ -977,6 +971,7 @@ footer{
 }
 
 @keyframes heroIn{
+  from{opacity:0;transform:translateY(28px);}
   to{opacity:1;transform:translateY(0);}
 }
 
