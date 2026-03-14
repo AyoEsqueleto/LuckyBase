@@ -83,6 +83,20 @@ body.is-locked iframe{
   pointer-events:none;
 }
 
+.scroll-lock-overlay{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:transparent;
+  opacity:0;
+  pointer-events:none;
+  touch-action:none;
+}
+
+body.is-locked .scroll-lock-overlay{
+  pointer-events:auto;
+}
+
 img{max-width:100%;height:auto;}
 
 section{
@@ -277,6 +291,7 @@ body.is-loaded .hero-visual{
 }
 
 .hero-shot{
+  position:relative;
   width:min(580px,92%);
   border-radius:28px;
   padding:14px;
@@ -285,13 +300,33 @@ body.is-loaded .hero-visual{
   box-shadow:0 26px 60px rgba(0,0,0,0.35);
 }
 
+.hero-shot::before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:18px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02)),
+    repeating-linear-gradient(90deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 20px),
+    #0b0d12;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
 .hero-shot iframe{
+  position:relative;
+  z-index:1;
   display:block;
   width:100%;
   height:360px;
   border:0;
   border-radius:18px;
   background:#ffffff;
+  opacity:0;
+  transition:opacity 0.4s ease;
+}
+
+.hero-shot iframe.is-ready{
+  opacity:1;
 }
 
 .trust-row{
@@ -1208,7 +1243,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="hero-visual" aria-hidden="true">
       <figure class="hero-shot">
-        <iframe src="mini-webs/hero.html" title="Mini web LuckyWeb"></iframe>
+        <iframe class="hero-iframe" src="about:blank" data-src="mini-webs/hero.html" data-lazy="manual" title="Mini web LuckyWeb"></iframe>
       </figure>
       <div class="hero-caption">Hero real</div>
       <div class="trust-row">
@@ -1231,14 +1266,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="before-card before reveal" data-reveal>
           <div class="before-badge">Antes</div>
           <div class="before-mock">
-            <iframe src="about:blank" data-src="mini-webs/antes.html" title="Mini web antes" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/antes.html" data-lazy="auto" title="Mini web antes" loading="lazy"></iframe>
           </div>
           <p>Contenido sin jerarquia clara y llamadas a la accion poco visibles.</p>
         </article>
         <article class="before-card after reveal" data-reveal>
           <div class="before-badge">Despues</div>
           <div class="before-mock">
-            <iframe src="about:blank" data-src="mini-webs/despues.html" title="Mini web despues" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/despues.html" data-lazy="auto" title="Mini web despues" loading="lazy"></iframe>
           </div>
           <p>Mensaje principal, visual destacado y CTA que guia a la conversion.</p>
         </article>
@@ -1261,7 +1296,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Estructura y jerarquia sin distracciones.</p>
           </div>
           <div class="process-visual-box">
-            <iframe src="about:blank" data-src="mini-webs/wireframe.html" title="Wireframe" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/wireframe.html" data-lazy="auto" title="Wireframe" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>Mapa de secciones</span>
@@ -1276,7 +1311,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Color, tipografia y estilo alineado a la marca.</p>
           </div>
           <div class="process-visual-box dark">
-            <iframe src="about:blank" data-src="mini-webs/diseno.html" title="Diseño visual" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/diseno.html" data-lazy="auto" title="Diseño visual" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>UI final</span>
@@ -1291,7 +1326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Codigo limpio, responsive y optimizado.</p>
           </div>
           <div class="process-visual-box">
-            <iframe src="about:blank" data-src="mini-webs/desarrollo.html" title="Desarrollo" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/desarrollo.html" data-lazy="auto" title="Desarrollo" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>HTML/CSS/JS</span>
@@ -1306,7 +1341,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Pruebas, ajustes finales y publicacion.</p>
           </div>
           <div class="process-visual-box dark">
-            <iframe src="about:blank" data-src="mini-webs/qa.html" title="QA" loading="lazy"></iframe>
+            <iframe src="about:blank" data-src="mini-webs/qa.html" data-lazy="auto" title="QA" loading="lazy"></iframe>
           </div>
           <div class="process-deliverables">
             <span>Test dispositivos</span>
@@ -1378,7 +1413,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-camera"></span>
               <span class="device-speaker"></span>
               <div class="device-screen">
-                <iframe src="about:blank" data-src="index.html" title="LuckyBase home desktop" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" data-lazy="auto" title="LuckyBase home desktop" loading="lazy"></iframe>
               </div>
             </div>
             <div class="device-stand"></div>
@@ -1388,7 +1423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="device-mock tablet">
               <span class="device-camera" style="left:50%;transform:translateX(-50%);"></span>
               <div class="device-screen">
-                <iframe src="about:blank" data-src="index.html" title="LuckyBase home tablet" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" data-lazy="auto" title="LuckyBase home tablet" loading="lazy"></iframe>
               </div>
             </div>
             <figcaption>Tablet precisa</figcaption>
@@ -1398,7 +1433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-notch"></span>
               <span class="device-button"></span>
               <div class="device-screen">
-                <iframe src="about:blank" data-src="index.html" title="LuckyBase home movil" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" data-lazy="auto" title="LuckyBase home movil" loading="lazy"></iframe>
               </div>
             </div>
             <figcaption>Movil fluido</figcaption>
@@ -1408,7 +1443,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="device-camera"></span>
               <span class="device-speaker"></span>
               <div class="device-screen">
-                <iframe src="about:blank" data-src="index.html" title="LuckyBase home widescreen" loading="lazy"></iframe>
+                <iframe src="about:blank" data-src="index.html" data-lazy="auto" title="LuckyBase home widescreen" loading="lazy"></iframe>
               </div>
             </div>
             <div class="device-stand"></div>
@@ -1631,10 +1666,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<div class="scroll-lock-overlay" aria-hidden="true"></div>
+
 <script>
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 const revealTargets = document.querySelectorAll("[data-reveal]")
+const scrollOverlay = document.querySelector(".scroll-lock-overlay")
 
 window.addEventListener("DOMContentLoaded", () => {
   const shouldAnimateHero = !prefersReducedMotion
@@ -1648,34 +1686,88 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   const lockDuration = window.innerWidth <= 768 ? 900 : 1100
+  const heroIframe = document.querySelector(".hero-iframe[data-src]")
+  let isLocked = false
+  let lockScrollY = 0
+
+  const loadHeroIframe = () => {
+    if (!heroIframe) return
+    if (!heroIframe.dataset.src) return
+    heroIframe.addEventListener("load", () => {
+      heroIframe.classList.add("is-ready")
+    }, { once: true })
+    heroIframe.src = heroIframe.dataset.src
+    heroIframe.removeAttribute("data-src")
+  }
 
   if (shouldAnimateHero && window.innerWidth <= 768) {
     const preventScroll = (event) => {
       event.preventDefault()
     }
+    const handleLockScroll = (event) => {
+      if (!isLocked) return
+      window.scrollTo(0, lockScrollY)
+      if (event && event.preventDefault) {
+        event.preventDefault()
+      }
+    }
     const lockScroll = () => {
+      lockScrollY = window.scrollY || 0
+      isLocked = true
       document.documentElement.classList.add("is-locked")
       document.body.classList.add("is-locked")
+      document.body.style.position = "fixed"
+      document.body.style.top = `-${lockScrollY}px`
+      document.body.style.left = "0"
+      document.body.style.right = "0"
+      document.body.style.width = "100%"
+      document.body.style.overflow = "hidden"
+      document.documentElement.style.overflow = "hidden"
       document.body.style.touchAction = "none"
       document.documentElement.style.touchAction = "none"
       document.addEventListener("touchmove", preventScroll, { passive: false })
       document.addEventListener("wheel", preventScroll, { passive: false })
+      window.addEventListener("scroll", handleLockScroll, { passive: false })
+      if (scrollOverlay) {
+        scrollOverlay.addEventListener("touchmove", preventScroll, { passive: false })
+        scrollOverlay.addEventListener("wheel", preventScroll, { passive: false })
+      }
     }
     const unlockScroll = () => {
+      isLocked = false
       document.documentElement.classList.remove("is-locked")
       document.body.classList.remove("is-locked")
+      document.body.style.removeProperty("position")
+      document.body.style.removeProperty("top")
+      document.body.style.removeProperty("left")
+      document.body.style.removeProperty("right")
+      document.body.style.removeProperty("width")
+      document.body.style.removeProperty("overflow")
+      document.documentElement.style.removeProperty("overflow")
       document.body.style.removeProperty("touch-action")
       document.documentElement.style.removeProperty("touch-action")
       document.removeEventListener("touchmove", preventScroll, { passive: false })
       document.removeEventListener("wheel", preventScroll, { passive: false })
+      window.removeEventListener("scroll", handleLockScroll, { passive: false })
+      if (scrollOverlay) {
+        scrollOverlay.removeEventListener("touchmove", preventScroll, { passive: false })
+        scrollOverlay.removeEventListener("wheel", preventScroll, { passive: false })
+      }
       document.body.classList.remove("is-animating")
+      window.scrollTo(0, lockScrollY)
     }
     lockScroll()
-    window.setTimeout(unlockScroll, lockDuration)
+    window.setTimeout(() => {
+      unlockScroll()
+      window.setTimeout(loadHeroIframe, 120)
+    }, lockDuration)
   } else if (shouldAnimateHero) {
     window.setTimeout(() => {
       document.body.classList.remove("is-animating")
+      loadHeroIframe()
     }, lockDuration)
+  } else {
+    loadHeroIframe()
   }
 })
 
@@ -1694,7 +1786,7 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   revealTargets.forEach((el) => observer.observe(el))
 }
 
-const lazyIframes = document.querySelectorAll("iframe[data-src]")
+const lazyIframes = document.querySelectorAll("iframe[data-src][data-lazy=\"auto\"]")
 const loadIframe = (iframe) => {
   const src = iframe.dataset.src
   if (!src) return
