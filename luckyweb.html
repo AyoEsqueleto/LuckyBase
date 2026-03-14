@@ -101,10 +101,12 @@ section{
 
 body.is-loaded .hero-inner{
   animation:heroIn 0.9s ease forwards;
+  will-change:transform,filter;
 }
 
 body.is-loaded .hero-visual{
   animation:heroIn 0.9s ease 0.18s forwards;
+  will-change:transform,filter;
 }
 
 .code-backdrop{
@@ -971,8 +973,8 @@ footer{
 }
 
 @keyframes heroIn{
-  from{opacity:0;transform:translateY(28px);}
-  to{opacity:1;transform:translateY(0);}
+  from{transform:translateY(18px);filter:blur(2px);}
+  to{transform:translateY(0);filter:blur(0);}
 }
 
 @media (prefers-reduced-motion: reduce){
