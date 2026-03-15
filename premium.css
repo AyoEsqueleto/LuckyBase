@@ -16,6 +16,8 @@
   --radius:16px;
   --shadow:0 14px 30px rgba(15,23,42,0.1);
   --shadow-hover:0 22px 45px rgba(15,23,42,0.15);
+  --page-pad:clamp(20px,6vw,90px);
+  --content-max:1160px;
 }
 
 body{
@@ -26,6 +28,17 @@ body{
   color:var(--ink);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+}
+
+section:not(.card){
+  padding-left:var(--page-pad);
+  padding-right:var(--page-pad);
+}
+
+.container{
+  width:100%;
+  max-width:var(--content-max);
+  margin:0 auto;
 }
 
 p{
@@ -174,7 +187,7 @@ section:not(.card) > h2 + p{
 .compare,
 .faq-item{
   border-radius:var(--radius);
-  background:linear-gradient(180deg,#ffffff,#f3f6ff);
+  background:var(--card);
   border:1px solid var(--outline);
   box-shadow:var(--shadow);
 }
@@ -187,29 +200,19 @@ section:not(.card) > h2 + p{
 .card::before{
   content:"";
   position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:3px;
-  background:linear-gradient(90deg,rgba(21,101,255,0.85),rgba(21,101,255,0));
-  opacity:0;
-  transition:opacity 0.3s ease;
-}
-
-.card::after{
-  content:"";
-  position:absolute;
   inset:0;
   border-radius:var(--radius);
-  background:linear-gradient(120deg,rgba(255,255,255,0.6),transparent 45%);
-  opacity:0;
-  transition:opacity 0.35s ease;
+  border:1px solid rgba(21,101,255,0);
+  box-shadow:0 0 0 0 rgba(21,101,255,0.0);
+  transition:border-color 0.25s ease,box-shadow 0.25s ease;
   pointer-events:none;
 }
 
-.card:hover::before,
-.card:hover::after{
-  opacity:1;
+@media (hover:hover){
+  .card:hover::before{
+    border-color:rgba(21,101,255,0.28);
+    box-shadow:0 12px 26px rgba(21,101,255,0.12);
+  }
 }
 
 .platform-btn,
@@ -224,7 +227,95 @@ button.submit,
 
 footer{
   background:linear-gradient(135deg,#0f3aa8,#1565ff 55%,#1f6bff);
+  color:#fff;
+  text-align:center;
+  padding:40px var(--page-pad);
+  position:relative;
   box-shadow:0 -12px 40px rgba(15,23,42,0.22);
+}
+
+footer a{
+  color:rgba(255,255,255,0.92);
+}
+
+.footer-copy{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.footer-copy img{
+  width:32px;
+  height:32px;
+  object-fit:contain;
+  display:block;
+}
+
+.footer-socials{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:12px;
+}
+
+.footer-instagram{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.16);
+  color:#fff;
+  text-decoration:none;
+  transition:transform 0.2s ease,background 0.2s ease;
+}
+
+.footer-instagram:hover{
+  transform:scale(1.06);
+  background:rgba(255,255,255,0.28);
+}
+
+.footer-instagram svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+.footer-preferences{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:12px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  position:static;
+}
+
+.footer-preferences:hover{
+  background:rgba(255,255,255,0.26);
+}
+
+.footer-legal{
+  margin-top:10px;
+}
+
+.footer-legal a{
+  color:rgba(255,255,255,0.85);
+  text-decoration:none;
+  font-size:13px;
+}
+
+.footer-legal a:hover{
+  text-decoration:underline;
 }
 
 body.dark-mode{
@@ -278,5 +369,32 @@ body.dark-mode .faq-item{
 }
 
 body.dark-mode footer{
-  background:#0b1220;
+  background:linear-gradient(135deg,#0b1220,#111827 60%,#0f172a);
+}
+
+body.dark-mode .about img{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  padding:0;
+}
+
+@media (hover:hover){
+  .platform-btn,
+  .ghost-btn,
+  .footer-instagram,
+  .footer-preferences,
+  .nav-login,
+  nav a,
+  button,
+  a{
+    transition:none !important;
+  }
+
+  .hero button:hover,
+  .footer-instagram:hover,
+  .platform-btn:hover,
+  .ghost-btn:hover{
+    transform:none !important;
+  }
 }
