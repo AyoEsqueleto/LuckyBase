@@ -202,6 +202,28 @@ nav a{
   border-radius:var(--radius);
   box-shadow:var(--glow);
   border:1px solid var(--stroke);
+  position:relative;
+  overflow:hidden;
+  animation:panelIn 0.5s ease;
+}
+
+.panel::after{
+  content:"";
+  position:absolute;
+  inset:-40% 10% auto 10%;
+  height:60%;
+  background:radial-gradient(circle at top,rgba(21,101,255,0.18),transparent 70%);
+  pointer-events:none;
+}
+
+.panel > *{
+  position:relative;
+  z-index:1;
+}
+
+@keyframes panelIn{
+  from{transform:translateY(12px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
 }
 
 .panel-toolbar{
@@ -281,6 +303,60 @@ nav a{
 
 .panel-status.is-bad span{
   color:#b91c1c;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.stat-card{
+  background:linear-gradient(140deg,rgba(21,101,255,0.12),rgba(96,165,250,0.08));
+  border-radius:16px;
+  padding:14px 16px;
+  border:1px solid rgba(59,130,246,0.2);
+  box-shadow:0 12px 26px rgba(15,23,42,0.08);
+  display:grid;
+  gap:6px;
+}
+
+.stat-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.stat-label{
+  font-size:12px;
+  color:#475569;
+}
+
+.stat-badge{
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(21,101,255,0.15);
+  color:#1e3a8a;
+  font-size:11px;
+  font-weight:600;
+}
+
+.stat-badge.is-bad{
+  background:rgba(248,113,113,0.2);
+  color:#b91c1c;
+}
+
+.stat-value{
+  font-size:18px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.stat-note{
+  font-size:12px;
+  color:#64748b;
 }
 
 .details{
@@ -461,6 +537,10 @@ body.dark-mode .panel{
   box-shadow:0 20px 50px rgba(0,0,0,0.35);
 }
 
+body.dark-mode .panel::after{
+  background:radial-gradient(circle at top,rgba(59,130,246,0.2),transparent 70%);
+}
+
 body.dark-mode .panel-chip{
   background:#0b1220;
   border-color:#334155;
@@ -504,6 +584,34 @@ body.dark-mode .panel-status small{
 
 body.dark-mode .panel-status.is-bad small{
   color:#fecaca;
+}
+
+body.dark-mode .stat-card{
+  background:linear-gradient(140deg,rgba(59,130,246,0.18),rgba(15,23,42,0.4));
+  border-color:#334155;
+  box-shadow:0 18px 30px rgba(0,0,0,0.35);
+}
+
+body.dark-mode .stat-label{
+  color:#94a3b8;
+}
+
+body.dark-mode .stat-badge{
+  background:rgba(59,130,246,0.25);
+  color:#bfdbfe;
+}
+
+body.dark-mode .stat-badge.is-bad{
+  background:rgba(248,113,113,0.2);
+  color:#fecaca;
+}
+
+body.dark-mode .stat-value{
+  color:#e2e8f0;
+}
+
+body.dark-mode .stat-note{
+  color:#94a3b8;
 }
 
 body.dark-mode .detail{
@@ -783,6 +891,32 @@ function renderPanel(raw){
         <span class="panel-chip">Soporte prioritario</span>
         <span class="panel-chip">Actualizaciones incluidas</span>
         <span class="panel-chip">Estado en tiempo real</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Plan activo</span>
+            <span class="stat-badge ${isUnpaid ? 'is-bad' : ''}">${isUnpaid ? 'Pendiente' : 'Activo'}</span>
+          </div>
+          <div class="stat-value">${data.plan || '-'}</div>
+          <div class="stat-note">Tipo: ${data.tipoplan || '-'}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Próximo pago</span>
+            <span class="stat-badge">Calendario</span>
+          </div>
+          <div class="stat-value">${data.proxpago || '-'}</div>
+          <div class="stat-note">Cuota: ${cuotaDisplay}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Dominio</span>
+            <span class="stat-badge">Web</span>
+          </div>
+          <div class="stat-value">${data.dominio || '-'}</div>
+          <div class="stat-note">Pedido: ${data.npedido || '-'}</div>
+        </div>
       </div>
       <div class="details">
         <div class="detail"><span>Tipo plan</span><strong>${data.tipoplan || '-'}</strong></div>
