@@ -992,9 +992,9 @@ margin:auto;
 margin-top:40px;
 padding:28px;
 border-radius:18px;
-background:linear-gradient(180deg,#ffffff,#f3f7ff);
-box-shadow:0 20px 45px rgba(21,101,255,0.14);
-border:1px solid rgba(21,101,255,0.18);
+background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,246,255,0.95));
+box-shadow:0 24px 55px rgba(21,101,255,0.18);
+border:1px solid rgba(21,101,255,0.22);
 position:relative;
 overflow:hidden;
 }
@@ -1008,9 +1008,20 @@ opacity:0.6;
 pointer-events:none;
 }
 
+.contact-box::after{
+content:"";
+position:absolute;
+inset:1px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,0.6);
+pointer-events:none;
+}
+
 .contact-box form{
 display:grid;
-gap:14px;
+gap:16px;
+position:relative;
+z-index:1;
 }
 
 .contact-box input,
@@ -1019,17 +1030,92 @@ gap:14px;
 width:100%;
 padding:14px;
 border-radius:10px;
-border:1px solid #d5def0;
+border:1px solid rgba(148,163,184,0.3);
 font-size:15px;
-background:#f8fbff;
-transition:border-color 0.25s ease,box-shadow 0.25s ease,background 0.25s ease;
+background:rgba(248,251,255,0.95);
+transition:border-color 0.25s ease,box-shadow 0.25s ease,background 0.25s ease,transform 0.2s ease;
 margin:0;
 }
+
+.contact-intro{
+display:grid;
+gap:6px;
+margin-bottom:18px;
+position:relative;
+z-index:1;
+}
+
+.contact-intro h3{
+font-size:22px;
+color:#0f172a;
+}
+
+.contact-intro p{
+color:#475569;
+}
+
+.contact-pill{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:max-content;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(21,101,255,0.12);
+color:#1e3a8a;
+font-weight:600;
+font-size:12px;
+}
+
+.contact-badges{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin:6px 0 16px;
+position:relative;
+z-index:1;
+}
+
+.contact-badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:6px 10px;
+border-radius:999px;
+background:#eef3ff;
+color:#1e3a8a;
+font-size:11px;
+font-weight:600;
+border:1px solid rgba(59,130,246,0.2);
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+.input-group{
+display:grid;
+gap:8px;
+}
+
+.input-group label{
+font-size:13px;
+font-weight:600;
+color:#1f2937;
+}
+
 
 .contact-box textarea{
 resize:vertical;
 min-height:120px;
 max-height:320px;
+}
+
+.field-meta{
+font-size:12px;
+color:#64748b;
 }
 
 .contact-box input:focus,
@@ -1038,6 +1124,11 @@ outline:none;
 border-color:#3b82f6;
 background:#fff;
 box-shadow:0 0 0 4px rgba(59,130,246,0.14);
+transform:translateY(-1px);
+}
+
+.input-group:focus-within label{
+color:#1e3a8a;
 }
 
 button.submit{
@@ -1051,6 +1142,9 @@ cursor:pointer;
 transition:transform 0.25s ease,box-shadow 0.25s ease;
 font-weight:600;
 letter-spacing:0.2px;
+min-height:48px;
+position:relative;
+overflow:hidden;
 
 }
 
@@ -1058,6 +1152,20 @@ button.submit:hover{
 transform:translateY(-2px);
 box-shadow:0 10px 20px rgba(21,101,255,0.28);
 }
+
+button.submit::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,rgba(255,255,255,0.2),transparent 60%);
+opacity:0;
+transition:opacity 0.25s ease;
+}
+
+button.submit:hover::after{
+opacity:1;
+}
+
 
 .contact-note{
 text-align:center;
@@ -1418,6 +1526,34 @@ body.dark-mode .contact-box textarea{
 background:#0f172a;
 border-color:#334155;
 color:#e2e8f0;
+}
+
+body.dark-mode .contact-box{
+background:linear-gradient(180deg,rgba(17,24,39,0.96),rgba(15,23,42,0.96));
+border-color:rgba(59,130,246,0.28);
+}
+
+body.dark-mode .contact-badge{
+background:#1e293b;
+border-color:#334155;
+color:#bfdbfe;
+}
+
+body.dark-mode .contact-intro h3{
+color:#e2e8f0;
+}
+
+body.dark-mode .contact-intro p{
+color:#cbd5e1;
+}
+
+body.dark-mode .contact-pill{
+background:rgba(59,130,246,0.2);
+color:#bfdbfe;
+}
+
+body.dark-mode .field-meta{
+color:#94a3b8;
 }
 
 body.dark-mode .contact-box input:focus,
@@ -2091,13 +2227,36 @@ impactantes.
 
 <div class="contact-box">
 
+<div class="contact-intro">
+<span class="contact-pill">Respuesta en 24h</span>
+<h3>Cuéntanos tu consulta</h3>
+<p>Te respondemos rápido y con claridad en menos de 24 horas.</p>
+</div>
+
+<div class="contact-badges">
+<span class="contact-badge">Sin spam</span>
+<span class="contact-badge">100% privado</span>
+<span class="contact-badge">Soporte real</span>
+</div>
+
 <form id="contactForm" action="https://formspree.io/f/mqeyzdyz" method="POST">
 
-<input type="text" name="nombre" placeholder="Nombre" required>
+<div class="contact-grid">
+<div class="input-group">
+<label for="contactName">Nombre</label>
+<input id="contactName" type="text" name="nombre" placeholder="Tu nombre" required>
+</div>
+<div class="input-group">
+<label for="contactEmail">Email</label>
+<input id="contactEmail" type="email" name="email" placeholder="tu@email.com" required>
+</div>
+</div>
 
-<input type="email" name="email" placeholder="Email" required>
-
-<textarea name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
+<div class="input-group">
+<label for="contactMessage">Mensaje</label>
+<textarea id="contactMessage" name="mensaje" rows="5" maxlength="600" placeholder="¿En qué podemos ayudarte?" required></textarea>
+<div class="field-meta">Incluye cualquier detalle importante para responderte mejor.</div>
+</div>
 
 <label class="terms-check">
 <input type="checkbox" name="terms" required>
@@ -2363,6 +2522,7 @@ scheduleHelpMessage()
 const contactForm=document.getElementById("contactForm")
 const formStatus=document.getElementById("formStatus")
 const termsCheckbox=document.querySelector('input[name="terms"]')
+const messageInput=document.getElementById("contactMessage")
 const themeToggle=document.getElementById("themeToggle")
 const footerLogo=document.getElementById("footerLogo")
 const sunIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line><line x1="4.9" y1="4.9" x2="7" y2="7"></line><line x1="17" y1="17" x2="19.1" y2="19.1"></line><line x1="17" y1="7" x2="19.1" y2="4.9"></line><line x1="4.9" y1="19.1" x2="7" y2="17"></line></svg>'
