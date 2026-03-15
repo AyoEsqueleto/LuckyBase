@@ -2164,6 +2164,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     const unlockScroll = () => {
       isLocked = false
+      // Capture the visual scroll offset from the body's top before removing fixed positioning
+      const scrolledTo = -parseInt(document.body.style.top || "0", 10) || lockScrollY
       document.documentElement.classList.remove("is-locked")
       document.body.classList.remove("is-locked")
       document.body.style.removeProperty("position")
@@ -2183,7 +2185,7 @@ window.addEventListener("DOMContentLoaded", () => {
         scrollOverlay.removeEventListener("wheel", preventScroll, { passive: false })
       }
       document.body.classList.remove("is-animating")
-      window.scrollTo(0, lockScrollY)
+      window.scrollTo(0, scrolledTo)
     }
     lockScroll()
     window.setTimeout(() => {
